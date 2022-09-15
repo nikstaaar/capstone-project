@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "bierner.github-markdown-preview",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "IronGeek.vscode-env",
+    "Orta.vscode-jest",
+    "hex-ci.stylelint-plus",
+    "styled-components.vscode-styled-components",
+    "formulahendry.auto-rename-tag",
+    "oderwat.indent-rainbow"
+  ]
+}

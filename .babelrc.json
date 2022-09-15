@@ -1,0 +1,16 @@
+{
+  "presets": ["next/babel"],
+  "plugins": ["styled-components"],
+  "env": {
+    "production": {
+      "plugins": [
+        [
+          "babel-plugin-jsx-remove-data-test-id",
+          {
+            "attributes": ["data-test-id", "data-testid"]
+          }
+        ]
+      ]
+    }
+  }
+}
