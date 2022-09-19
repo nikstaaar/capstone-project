@@ -5,7 +5,8 @@ import {useState} from 'react';
 import Layout from '../components/Layout';
 
 export default function BarPage() {
-	const [ingredients, setIngredients] = useState([
+	const [filteredIngredients, setFilteredIngredients] = useState([]);
+	const [ingredients] = useState([
 		{id: nanoid(), name: 'Vodka', color: '3D45F8', saved: false},
 		{id: nanoid(), name: 'Rye', color: 'A15C0A', saved: false},
 		{id: nanoid(), name: 'Cognac', color: 'B12132', saved: false},
@@ -26,15 +27,23 @@ export default function BarPage() {
 			<>
 				<h1>My Bar</h1>
 				<form
-					onSubmit={() => {
-						setIngredients();
+					onSubmit={event => {
+						event.preventDefault();
+						const formData = new FormData(event.target);
+						const formValues = Object.fromEntries(formData);
+						const values = formValues.input;
+						const items = ingredients.filter(ingredient =>
+							ingredient.name.toLowerCase().includes(values.toLowerCase())
+						);
+						console.log(items);
+						setFilteredIngredients(items);
 					}}
 				>
-					<input name="ingredient" type="text"></input>
+					<input type="search" name="input"></input>
 					<button type="submit">submit</button>
 				</form>
 				<ul>
-					{ingredients.map(ingredient => {
+					{filteredIngredients.map(ingredient => {
 						return (
 							<li key={ingredient.id}>
 								<h2>{ingredient.name}</h2>
