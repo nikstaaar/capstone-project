@@ -1,21 +1,24 @@
-import {nanoid} from 'nanoid';
 import Head from 'next/head';
 import {useState} from 'react';
+import {useEffect} from 'react';
 
 import Layout from '../components/Layout';
 
 export default function BarPage() {
-	const [filteredIngredients, setFilteredIngredients] = useState([]);
-	const [ingredients] = useState([
-		{id: nanoid(), name: 'Vodka', color: '3D45F8', saved: false},
-		{id: nanoid(), name: 'Rye', color: 'A15C0A', saved: false},
-		{id: nanoid(), name: 'Cognac', color: 'B12132', saved: false},
-		{id: nanoid(), name: 'Gin', color: '21B1A0', saved: false},
-		{id: nanoid(), name: 'Grenadine', color: 'B12192', saved: false},
-		{id: nanoid(), name: 'Triple Sec', color: 'FFA318', saved: false},
-		{id: nanoid(), name: 'Orgeat', color: 'FAF2CA', saved: false},
-		{id: nanoid(), name: 'Campari', color: 'B12132', saved: false},
-		{id: nanoid(), name: 'Scotch', color: '565452', saved: false},
+	const [data, setData] = useState();
+	useEffect(() => {
+		async function fetchData() {
+			const response = await fetch('/api/mongoIngredients');
+			const json = await response.json();
+			setData(json);
+			console.log(json);
+		}
+		fetchData();
+	}, []);
+
+	const [filteredIngredients, setFilteredIngredients] = useState([
+		{name: 'foo', id: 1},
+		{name: 'bar', id: 2},
 	]);
 
 	return (
@@ -32,14 +35,13 @@ export default function BarPage() {
 						const formData = new FormData(event.target);
 						const formValues = Object.fromEntries(formData);
 						const values = formValues.input;
-						const items = ingredients.filter(ingredient =>
+						const items = data?.filter(ingredient =>
 							ingredient.name.toLowerCase().includes(values.toLowerCase())
 						);
-						console.log(items);
 						setFilteredIngredients(items);
 					}}
 				>
-					<input type="search" name="input"></input>
+					<input type="search" name="search"></input>
 					<button type="submit">submit</button>
 				</form>
 				<ul>
