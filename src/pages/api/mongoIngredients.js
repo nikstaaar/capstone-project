@@ -7,6 +7,7 @@ export default async function Handler(request, response) {
 		switch (request.method) {
 			case 'GET': {
 				const ingredients = await Ingredient.find({});
+				console.log(ingredients);
 				response.status(200).json({success: true, data: ingredients});
 				break;
 			}
