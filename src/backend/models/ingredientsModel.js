@@ -6,6 +6,6 @@ const ingredientsSchema = new Schema({
 	saved: Boolean,
 });
 
-const Ingredient = models.Ingredients || model('Ingredient', ingredientsSchema);
+const Ingredients = models.Ingredients || model('Ingredients', ingredientsSchema);
 
-export default Ingredient;
+export default Ingredients;

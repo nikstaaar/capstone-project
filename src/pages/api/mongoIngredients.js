@@ -1,19 +1,19 @@
 import dbConnect from '../../backend/lib/dbConnect';
-import Ingredient from '../../backend/models/ingredientsModel';
+import Ingredients from '../../backend/models/ingredientsModel';
 
 export default async function Handler(request, response) {
 	try {
 		await dbConnect();
 		switch (request.method) {
 			case 'GET': {
-				const ingredients = await Ingredient.find({});
+				const ingredients = await Ingredients.find();
 				console.log(ingredients);
 				response.status(200).json({success: true, data: ingredients});
 				break;
 			}
 
 			case 'POST': {
-				const ingredient = await Ingredient.create(request.body);
+				const ingredient = await Ingredients.create(request.body);
 				response.status(201).json({success: true, data: ingredient});
 				break;
 			}
