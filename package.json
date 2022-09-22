@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "axios": "0.27.2",
+    "immer": "^9.0.15",
     "mongoose": "^6.6.1",
     "nanoid": "3.3.4",
     "next": "12.2.5",
