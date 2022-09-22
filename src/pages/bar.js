@@ -1,21 +1,19 @@
 import Head from 'next/head';
-import {useState} from 'react';
 import {useEffect} from 'react';
 
 import Layout from '../components/Layout';
+import useStore from '../hooks/useStore';
 
 export default function BarPage() {
-	const [data, setData] = useState(null);
-	useEffect(() => {
-		async function fetchData() {
-			const response = await fetch('/api/mongoIngredients');
-			const json = await response.json();
-			setData(json.data);
-		}
-		fetchData();
-	}, []);
+	const fetchIngredients = useStore(state => state.fetchSomething);
+	const setFilteredIngredients = useStore(state => state.setFilteredIngredients);
+	const ingredients = useStore(state => state.fetchedData);
+	const filteredIngredients = useStore(state => state.filteredIngredients);
+	const updateIngredients = useStore(state => state.updateIngredients);
 
-	const [filteredIngredients, setFilteredIngredients] = useState([]);
+	useEffect(() => {
+		fetchIngredients('/api/mongoIngredients');
+	}, [fetchIngredients]);
 
 	return (
 		<Layout>
@@ -31,7 +29,7 @@ export default function BarPage() {
 						const formData = new FormData(event.target);
 						const formValues = Object.fromEntries(formData);
 						const values = formValues.search;
-						const items = data.filter(ingredient =>
+						const items = ingredients?.filter(ingredient =>
 							ingredient.name.toLowerCase().includes(values.toLowerCase())
 						);
 
@@ -47,9 +45,15 @@ export default function BarPage() {
 						return (
 							<li key={ingredient._id}>
 								<h2>{ingredient.name}</h2>
+								<button
+									onClick={() =>
+										updateIngredients({...ingredient, saved: !ingredient.saved})
+									}
+								></button>
+								{ingredient.saved ? <p>saved</p> : undefined}
 							</li>
 						);
-					})}
+					}) ?? 'not loaded yet'}
 				</ul>
 			</>
 		</Layout>
