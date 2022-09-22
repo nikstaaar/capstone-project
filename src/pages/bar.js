@@ -1,11 +1,18 @@
 import Head from 'next/head';
 import {useState} from 'react';
+import {useEffect} from 'react';
 import {useStore} from 'zustand';
 
 import Layout from '../components/Layout';
 
 export default function BarPage() {
+	const fetchIngredients = useStore(state => state.fetchSomething);
 	const ingredients = useStore(state => state.fetchedData);
+
+	useEffect(() => {
+		fetchIngredients('/api/mongoIngredients');
+	}, [fetchIngredients]);
+
 	const [filteredIngredients, setFilteredIngredients] = useState(null);
 
 	return (

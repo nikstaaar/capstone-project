@@ -1,20 +1,8 @@
 import Head from 'next/head';
-import {useEffect} from 'react';
-import {useStore} from 'zustand';
 
 import Layout from '../components/Layout';
 
 export default function HomePage() {
-	useEffect(() => {
-		async function fetchData() {
-			const response = await fetch('/api/mongoIngredients');
-			const json = await response.json();
-			handleData(json.data);
-		}
-		fetchData();
-	}, []);
-
-	const handleData = useStore(state => state.handleData);
 	return (
 		<Layout>
 			<Head>
