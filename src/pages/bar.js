@@ -1,19 +1,18 @@
 import Head from 'next/head';
-import {useState} from 'react';
 import {useEffect} from 'react';
-import {useStore} from 'zustand';
 
 import Layout from '../components/Layout';
+import useStore from '../hooks/useStore';
 
 export default function BarPage() {
 	const fetchIngredients = useStore(state => state.fetchSomething);
+	const setFilteredIngredients = useStore(state => state.setFilteredIngredients);
 	const ingredients = useStore(state => state.fetchedData);
+	const filteredIngredients = useStore(state => state.filteredIngredients);
 
 	useEffect(() => {
 		fetchIngredients('/api/mongoIngredients');
 	}, [fetchIngredients]);
-
-	const [filteredIngredients, setFilteredIngredients] = useState(null);
 
 	return (
 		<Layout>
@@ -41,7 +40,7 @@ export default function BarPage() {
 				</form>
 
 				<ul>
-					{filteredIngredients?.map(ingredient => {
+					{filteredIngredients.map(ingredient => {
 						return (
 							<li key={ingredient._id}>
 								<h2>{ingredient.name}</h2>
