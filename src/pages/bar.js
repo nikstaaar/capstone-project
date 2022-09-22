@@ -9,6 +9,7 @@ export default function BarPage() {
 	const setFilteredIngredients = useStore(state => state.setFilteredIngredients);
 	const ingredients = useStore(state => state.fetchedData);
 	const filteredIngredients = useStore(state => state.filteredIngredients);
+	const updateIngredients = useStore(state => state.updateIngredients);
 
 	useEffect(() => {
 		fetchIngredients('/api/mongoIngredients');
@@ -44,6 +45,12 @@ export default function BarPage() {
 						return (
 							<li key={ingredient._id}>
 								<h2>{ingredient.name}</h2>
+								<button
+									onClick={() =>
+										updateIngredients({...ingredient, saved: !ingredient.saved})
+									}
+								></button>
+								{ingredient.saved ? <p>saved</p> : undefined}
 							</li>
 						);
 					}) ?? 'not loaded yet'}

@@ -1,3 +1,4 @@
+import produce from 'immer';
 import create from 'zustand';
 
 const useStore = create(set => ({
@@ -5,7 +6,19 @@ const useStore = create(set => ({
 	filteredIngredients: [],
 	setFilteredIngredients: newState => {
 		set({filteredIngredients: newState});
+
+		console.log(newState);
 	},
+	updateIngredients: ingredient =>
+		set(
+			produce(draft => {
+				const selectedIngredient = draft.filteredIngredients.find(
+					element => element._id === ingredient._id
+				);
+				selectedIngredient.saved = ingredient.saved;
+				console.log(selectedIngredient);
+			})
+		),
 	fetchSomething: async url => {
 		try {
 			const response = await fetch(url);
