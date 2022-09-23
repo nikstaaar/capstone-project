@@ -28,22 +28,21 @@ export default function BarPage() {
 			</Head>
 			<>
 				<h1>My Bar</h1>
-				<form
-					onSubmit={event => {
+
+				<input
+					onChange={event => {
 						event.preventDefault();
-						const formData = new FormData(event.target);
-						const formValues = Object.fromEntries(formData);
-						const values = formValues.search;
+
+						const values = event.target.value;
 						const items = ingredients.filter(ingredient =>
 							ingredient.name.toLowerCase().includes(values.toLowerCase())
 						);
 
 						setFilteredIngredients(items);
 					}}
-				>
-					<input type="search" name="search"></input>
-					<button type="submit">submit</button>
-				</form>
+					type="search"
+					name="search Ingredient"
+				></input>
 
 				<ul>
 					{filteredIngredients.map(ingredient => {
