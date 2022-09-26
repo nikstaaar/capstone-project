@@ -3,8 +3,12 @@ import create from 'zustand';
 
 const useStore = create((set, get) => ({
 	fetchedData: [],
+	searchItem: '',
 	filteredIngredients: [],
 	ingredients: [],
+	setSearchItem: item => {
+		set({searchItem: item});
+	},
 	setFilteredIngredients: newState => {
 		set({filteredIngredients: newState});
 	},

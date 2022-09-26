@@ -6,6 +6,8 @@ import useStore from '../hooks/useStore';
 
 export default function BarPage() {
 	const fetchIngredients = useStore(state => state.fetchSomething);
+	const searchItem = useStore(state => state.searchItem);
+	const setSearchItem = useStore(state => state.setSearchItem);
 	const setFilteredIngredients = useStore(state => state.setFilteredIngredients);
 	const ingredients = useStore(state => state.ingredients);
 	const filteredIngredients = useStore(state => state.filteredIngredients);
@@ -17,8 +19,20 @@ export default function BarPage() {
 	}, [fetchIngredients]);
 
 	useEffect(() => {
-		!saveMode ? setFilteredIngredients(ingredients) : undefined;
+		const items = ingredients.filter(ingredient =>
+			ingredient.name.toLowerCase().includes(searchItem.toLowerCase())
+		);
+
+		setFilteredIngredients(items);
 	}, [ingredients]);
+
+	useEffect(() => {
+		const items = ingredients.filter(ingredient =>
+			ingredient.name.toLowerCase().includes(searchItem.toLowerCase())
+		);
+
+		setFilteredIngredients(items);
+	}, [searchItem]);
 
 	return (
 		<Layout>
@@ -30,15 +44,11 @@ export default function BarPage() {
 				<h1>My Bar</h1>
 
 				<input
+					value={searchItem}
 					onChange={event => {
 						event.preventDefault();
-
-						const values = event.target.value;
-						const items = ingredients.filter(ingredient =>
-							ingredient.name.toLowerCase().includes(values.toLowerCase())
-						);
-
-						setFilteredIngredients(items);
+						const search = event.target.value;
+						setSearchItem(search);
 					}}
 					type="search"
 					name="search Ingredient"
@@ -50,7 +60,7 @@ export default function BarPage() {
 							return saveMode || ingredient.saved ? (
 								<li key={ingredient._id}>
 									<h2>{ingredient.name}</h2>
-									{saveMode ? (
+									{saveMode && !ingredient.saved ? (
 										<button
 											onClick={() =>
 												updateIngredients({
