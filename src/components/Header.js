@@ -1,13 +1,9 @@
-import Link from 'next/link';
+import {StyledHeader, Headline} from './styled/Header.styled';
 
 export default function Header() {
 	return (
-		<header>
-			<nav>
-				<Link href="/">Home</Link>
-				<Link href="/about">About me</Link>
-				<Link href="/bar">CLICK HERE !! my Bar !! CLICK HERE</Link>
-			</nav>
-		</header>
+		<StyledHeader>
+			<Headline>My Bar</Headline>
+		</StyledHeader>
 	);
 }
