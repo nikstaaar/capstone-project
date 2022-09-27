@@ -18,7 +18,8 @@ export default function Search() {
 					}}
 					type="search"
 					name="search Ingredient"
-				></SearchInput>
+					label="search Ingredients"
+				/>
 			</SearchContainer>
 		</SearchBar>
 	);
