@@ -2,12 +2,15 @@ import Head from 'next/head';
 import {useState, useEffect} from 'react';
 
 import Layout from '../components/Layout';
+import Search from '../components/Search';
+import {Button} from '../components/styled/Button.styled';
+import {IngredientCard} from '../components/styled/IngredientCard.styled';
+import {IngredientGrid} from '../components/styled/IngredientCard.styled';
 import useStore from '../hooks/useStore';
 
 export default function BarPage() {
 	const fetchIngredients = useStore(state => state.fetchSomething);
 	const searchItem = useStore(state => state.searchItem);
-	const setSearchItem = useStore(state => state.setSearchItem);
 	const setFilteredIngredients = useStore(state => state.setFilteredIngredients);
 	const ingredients = useStore(state => state.ingredients);
 	const filteredIngredients = useStore(state => state.filteredIngredients);
@@ -22,7 +25,6 @@ export default function BarPage() {
 		const items = ingredients.filter(ingredient =>
 			ingredient.name.toLowerCase().includes(searchItem.toLowerCase())
 		);
-
 		setFilteredIngredients(items);
 	}, [ingredients]);
 
@@ -41,27 +43,20 @@ export default function BarPage() {
 				<meta key="description" name="description" content="About" />
 			</Head>
 			<>
-				<h1>My Bar</h1>
-
-				<input
-					value={searchItem}
-					onChange={event => {
-						event.preventDefault();
-						const search = event.target.value;
-						setSearchItem(search);
-					}}
-					type="search"
-					name="search Ingredient"
-				></input>
-
-				<ul>
+				<Search />
+				<IngredientGrid>
 					{filteredIngredients.map(ingredient => {
 						{
 							return saveMode || ingredient.saved ? (
-								<li key={ingredient._id}>
+								<IngredientCard
+									color={ingredient.color}
+									mode={saveMode}
+									saved={ingredient.saved}
+									key={ingredient._id}
+								>
 									<h2>{ingredient.name}</h2>
 									{saveMode && !ingredient.saved ? (
-										<button
+										<Button
 											onClick={() =>
 												updateIngredients({
 													...ingredient,
@@ -69,10 +64,10 @@ export default function BarPage() {
 												})
 											}
 										>
-											save
-										</button>
+											+
+										</Button>
 									) : (
-										<button
+										<Button
 											onClick={() =>
 												updateIngredients({
 													...ingredient,
@@ -80,31 +75,31 @@ export default function BarPage() {
 												})
 											}
 										>
-											remove
-										</button>
+											X
+										</Button>
 									)}
-								</li>
+								</IngredientCard>
 							) : undefined;
 						}
 					})}
-				</ul>
+				</IngredientGrid>
 				{!saveMode ? (
-					<button
+					<Button
 						onClick={() => {
 							setSaveMode(true);
 						}}
 					>
-						Save Mode
-					</button>
+						+
+					</Button>
 				) : (
-					<button
+					<Button
 						onClick={() => {
 							setSaveMode(false);
 							setFilteredIngredients(ingredients);
 						}}
 					>
-						Exit Save Mode
-					</button>
+						Done
+					</Button>
 				)}
 				{console.log(ingredients)}
 			</>
