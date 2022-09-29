@@ -17,7 +17,7 @@ export default async function handler(request, response) {
 	const drinks = drinksA_Z.flat(1);
 
 	drinks.map(drink => {
-		console.log(drink);
+		console.log(drink.strDrink);
 	});
 
 	response.status(200).json(drinks);
