@@ -1,52 +1,56 @@
 import produce from 'immer';
 import create from 'zustand';
+import {persist} from 'zustand/middleware';
 
-const useStore = create((set, get) => ({
-	fetchedData: [],
-	searchItem: '',
-	filteredIngredients: [],
-	ingredients: [],
-	cocktails: [],
-	setSearchItem: item => {
-		set({searchItem: item});
-	},
-	setFilteredIngredients: newState => {
-		set({filteredIngredients: newState});
-	},
-	updateIngredients: ingredient =>
-		set(
-			produce(draft => {
-				const selectedIngredient = draft.ingredients.find(
-					element => element._id === ingredient._id
-				);
-				selectedIngredient.saved = ingredient.saved;
-			})
-		),
+const useStore = create(
+	persist((set, get) => ({
+		fetchedIData: [],
+		fetchedCData: [],
+		searchItem: '',
+		filteredIngredients: [],
+		ingredients: [],
+		cocktails: [],
+		setSearchItem: item => {
+			set({searchItem: item});
+		},
+		setFilteredIngredients: newState => {
+			set({filteredIngredients: newState});
+		},
+		updateIngredients: ingredient =>
+			set(
+				produce(draft => {
+					const selectedIngredient = draft.ingredients.find(
+						element => element._id === ingredient._id
+					);
+					selectedIngredient.saved = ingredient.saved;
+				})
+			),
 
-	fetchCocktails: async url => {
-		try {
-			const response = await fetch(url);
-			const json = await response.json();
-			const data = json.data;
-			set({fetchedData: data});
-			set({cocktails: get().fetchedData});
-		} catch (error) {
-			console.error(`Upps das war ein Fehler: ${error}`);
-		}
-	},
+		fetchCocktails: async url => {
+			try {
+				const response = await fetch(url);
+				const json = await response.json();
+				const data = json.data;
+				set({fetchedCData: data});
+				set({cocktails: get().fetchedCData});
+			} catch (error) {
+				console.error(`Upps das war ein Fehler: ${error}`);
+			}
+		},
 
-	fetchIngredients: async url => {
-		try {
-			const response = await fetch(url);
-			const json = await response.json();
-			const data = json.data;
-			set({fetchedData: data});
-			set({ingredients: get().fetchedData});
-			set({filteredIngredients: get().fetchedData});
-		} catch (error) {
-			console.error(`Upps das war ein Fehler: ${error}`);
-		}
-	},
-}));
+		fetchIngredients: async url => {
+			try {
+				const response = await fetch(url);
+				const json = await response.json();
+				const data = json.data;
+				set({fetchedIData: data});
+				set({ingredients: get().fetchedIData});
+				set({filteredIngredients: get().fetchedIData});
+			} catch (error) {
+				console.error(`Upps das war ein Fehler: ${error}`);
+			}
+		},
+	}))
+);
 
 export default useStore;
