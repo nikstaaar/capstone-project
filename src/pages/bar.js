@@ -9,14 +9,14 @@ import {IngredientGrid} from '../components/styled/IngredientCard.styled';
 import useStore from '../hooks/useStore';
 
 export default function BarPage() {
-	const fetchIngredients = useStore(state => state.fetchSomething);
+	const fetchIngredients = useStore(state => state.fetchIngredients);
 	const searchItem = useStore(state => state.searchItem);
 	const setFilteredIngredients = useStore(state => state.setFilteredIngredients);
 	const ingredients = useStore(state => state.ingredients);
 	const filteredIngredients = useStore(state => state.filteredIngredients);
 	const updateIngredients = useStore(state => state.updateIngredients);
-
 	const [saveMode, setSaveMode] = useState(false);
+
 	useEffect(() => {
 		fetchIngredients('/api/mongoIngredients');
 	}, [fetchIngredients]);
