@@ -6,6 +6,7 @@ const useStore = create((set, get) => ({
 	searchItem: '',
 	filteredIngredients: [],
 	ingredients: [],
+	cocktails: [],
 	setSearchItem: item => {
 		set({searchItem: item});
 	},
@@ -22,7 +23,19 @@ const useStore = create((set, get) => ({
 			})
 		),
 
-	fetchSomething: async url => {
+	fetchCocktails: async url => {
+		try {
+			const response = await fetch(url);
+			const json = await response.json();
+			const data = json.data;
+			set({fetchedData: data});
+			set({cocktails: get().fetchedData});
+		} catch (error) {
+			console.error(`Upps das war ein Fehler: ${error}`);
+		}
+	},
+
+	fetchIngredients: async url => {
 		try {
 			const response = await fetch(url);
 			const json = await response.json();
