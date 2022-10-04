@@ -2,7 +2,8 @@ import produce from 'immer';
 import create from 'zustand';
 
 const useStore = create((set, get) => ({
-	fetchedData: [],
+	fetchedIData: [],
+	fetchedCData: [],
 	searchItem: '',
 	filteredIngredients: [],
 	ingredients: [],
@@ -28,8 +29,8 @@ const useStore = create((set, get) => ({
 			const response = await fetch(url);
 			const json = await response.json();
 			const data = json.data;
-			set({fetchedData: data});
-			set({cocktails: get().fetchedData});
+			set({fetchedCData: data});
+			set({cocktails: get().fetchedCData});
 		} catch (error) {
 			console.error(`Upps das war ein Fehler: ${error}`);
 		}
@@ -40,13 +41,12 @@ const useStore = create((set, get) => ({
 			const response = await fetch(url);
 			const json = await response.json();
 			const data = json.data;
-			set({fetchedData: data});
-			set({ingredients: get().fetchedData});
-			set({filteredIngredients: get().fetchedData});
+			set({fetchedIData: data});
+			set({ingredients: get().fetchedIData});
+			set({filteredIngredients: get().fetchedIData});
 		} catch (error) {
 			console.error(`Upps das war ein Fehler: ${error}`);
 		}
 	},
 }));
-
 export default useStore;
