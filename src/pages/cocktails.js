@@ -26,7 +26,18 @@ export default function CocktailPage() {
 			<>
 				<ul>
 					{cocktails.map(cocktail => {
-						return <li key={cocktail.id}>{cocktail.name}</li>;
+						return (
+							<li key={cocktail.id}>
+								{cocktail.name}
+								<br></br>
+								<img
+									src={cocktail.image}
+									alt={cocktail.name}
+									style={{maxHeight: 100}}
+								></img>
+								<p>{cocktail.instructions}</p>
+							</li>
+						);
 					})}
 				</ul>
 			</>
