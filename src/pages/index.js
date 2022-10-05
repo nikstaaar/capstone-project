@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
 import Layout from '../components/Layout';
+import Login from '../components/Login';
 
 export default function HomePage() {
 	return (
@@ -9,7 +10,7 @@ export default function HomePage() {
 				<title key="title">My Project</title>
 				<meta key="description" name="description" content="This is my project" />
 			</Head>
-			<h1>Home</h1>
+			<Login />
 		</Layout>
 	);
 }
