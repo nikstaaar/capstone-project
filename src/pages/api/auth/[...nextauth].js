@@ -1,6 +1,9 @@
+import {MongoDBAdapter} from '@next-auth/mongodb-adapter';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
+
+import clientPromise from '../../../backend/lib/mongodb.js';
 
 const providers = [];
 if (process.env.VERCEL_ENV === 'preview') {
@@ -34,5 +37,7 @@ if (process.env.VERCEL_ENV === 'preview') {
 
 export const authOptions = {
 	providers,
+	debug: process.env.NODE_ENV === 'development',
+	adapter: MongoDBAdapter(clientPromise),
 };
 export default NextAuth(authOptions);
