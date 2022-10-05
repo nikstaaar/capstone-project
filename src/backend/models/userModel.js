@@ -17,12 +17,11 @@ const userSchema = new Schema({
 	},
 	ingredients: {
 		type: [String],
-		default: [],
-	},
-	hashedPassword: {
-		type: String,
-		required: true,
-		minlength: 5,
+		default: [
+			'632d69f7244ea4c1577e2c64',
+			'633de007084435029dd87e24',
+			'632ae9c6181d90945822dc24',
+		],
 	},
 	image: String,
 });
