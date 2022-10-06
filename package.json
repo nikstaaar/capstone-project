@@ -19,6 +19,8 @@
     "toc": "npx markdown-toc@1 README.md -i"
   },
   "dependencies": {
+    "@mdi/js": "^7.0.96",
+    "@mdi/react": "^1.6.1",
     "@next-auth/mongodb-adapter": "^1.1.0",
     "axios": "0.27.2",
     "immer": "^9.0.15",
