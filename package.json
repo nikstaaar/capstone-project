@@ -19,12 +19,16 @@
     "toc": "npx markdown-toc@1 README.md -i"
   },
   "dependencies": {
+    "@mdi/js": "^7.0.96",
+    "@mdi/react": "^1.6.1",
+    "@next-auth/mongodb-adapter": "^1.1.0",
     "axios": "0.27.2",
     "immer": "^9.0.15",
+    "mongodb": "^4.10.0",
     "mongoose": "^6.6.1",
     "nanoid": "3.3.4",
     "next": "12.2.5",
-    "next-auth": "^4.12.2",
+    "next-auth": "^4.12.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "styled-components": "5.3.5",
