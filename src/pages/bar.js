@@ -101,7 +101,6 @@ export default function BarPage() {
 						Done
 					</Button>
 				)}
-				{console.log(ingredients)}
 			</>
 		</Layout>
 	);

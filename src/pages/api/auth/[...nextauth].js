@@ -5,6 +5,8 @@ import GithubProvider from 'next-auth/providers/github';
 
 import clientPromise from '../../../backend/lib/mongodb.js';
 
+const current = new Date();
+const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
 const providers = [];
 if (process.env.VERCEL_ENV === 'preview') {
 	providers.push(
@@ -31,6 +33,17 @@ if (process.env.VERCEL_ENV === 'preview') {
 		GithubProvider({
 			clientId: process.env.GITHUB_ID,
 			clientSecret: process.env.GITHUB_SECRET,
+			profile(profile) {
+				return {
+					id: profile.id,
+					name: profile.name,
+					userName: profile.login,
+					email: profile.email,
+					image: profile.avatar_url,
+					ingredients: [],
+					createdAt: date,
+				};
+			},
 		})
 	);
 }
