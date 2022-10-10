@@ -1,4 +1,5 @@
 import {MongoDBAdapter} from '@next-auth/mongodb-adapter';
+import mongoose from 'mongoose';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
@@ -40,7 +41,12 @@ if (process.env.VERCEL_ENV === 'preview') {
 					userName: profile.login,
 					email: profile.email,
 					image: profile.avatar_url,
-					ingredients: [],
+					ingredients: [
+						{
+							type: mongoose.Schema.Types.ObjectId,
+							ref: 'ingredients',
+						},
+					],
 					createdAt: date,
 				};
 			},

@@ -2,16 +2,11 @@ import Head from 'next/head';
 import {useEffect} from 'react';
 
 import Layout from '../components/Layout';
-import useStore from '../hooks/useStore';
+import cocktailsStore from '../hooks/cocktailsStore';
 
 export default function CocktailPage() {
-	const fetchCocktails = useStore(state => state.fetchCocktails);
-	const cocktails = useStore(state => state.cocktails);
-	const ingredients = useStore(state => state.ingredients);
-
-	const availableIngredients = ingredients.filter(ingredient => ingredient.saved === true);
-
-	console.log(availableIngredients);
+	const fetchCocktails = cocktailsStore(state => state.fetchCocktails);
+	const cocktails = cocktailsStore(state => state.cocktails);
 
 	useEffect(() => {
 		fetchCocktails('/api/cocktails');
