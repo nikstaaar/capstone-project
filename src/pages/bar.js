@@ -26,7 +26,6 @@ export default function BarPage() {
 			</Head>
 			<IngredientGrid>
 				{!savedIngredients && <>There are no Ingredients in your Bar</>}
-				<Link href="/select">Add more Ingredients</Link>
 				{savedIngredients?.map(ingredient => {
 					return (
 						<IngredientCard key={ingredient._id} color={ingredient.color}>
@@ -35,6 +34,7 @@ export default function BarPage() {
 					);
 				})}
 			</IngredientGrid>
+			<Link href="/select">Add more Ingredients</Link>
 		</Layout>
 	);
 }

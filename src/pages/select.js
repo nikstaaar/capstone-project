@@ -39,6 +39,7 @@ export default function BarPage() {
 						<IngredientCard key={ingredient._id} color={ingredient.color}>
 							<p>{ingredient.name}</p>
 							<button
+								type="button"
 								onClick={() => {
 									setMoreIngredients([...moreIngredients, ingredient._id]);
 								}}

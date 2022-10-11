@@ -38,26 +38,23 @@ export default function CocktailPage() {
 				<title key="title">My Bar</title>
 				<meta key="description" name="description" content="About" />
 			</Head>
-			<>
-				<ul>
-					<IngredientGrid>
-						{cocktails.map(cocktail => {
-							const ingredients = cocktail.ingredients.names;
-							return ingredients.every(isAvailable) ? (
-								<li key={cocktail.id}>
-									{cocktail.name}
-									<Image
-										src={cocktail.image}
-										alt={cocktail.name}
-										width="100px"
-										height="100px"
-									></Image>
-								</li>
-							) : undefined;
-						})}
-					</IngredientGrid>
-				</ul>
-			</>
+
+			<IngredientGrid>
+				{cocktails.map(cocktail => {
+					const ingredients = cocktail.ingredients.names;
+					return ingredients.every(isAvailable) ? (
+						<li key={cocktail.id}>
+							{cocktail.name}
+							<Image
+								src={cocktail.image}
+								alt={cocktail.name}
+								width="100px"
+								height="100px"
+							></Image>
+						</li>
+					) : undefined;
+				})}
+			</IngredientGrid>
 		</Layout>
 	);
 }

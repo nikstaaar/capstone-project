@@ -173,7 +173,6 @@ export default async function handler(request, response) {
 
 		switch (request.method) {
 			case 'GET': {
-				//const data = await Ingredients.find();
 				response.status(200).json(ingredients);
 				break;
 			}
