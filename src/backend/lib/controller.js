@@ -3,7 +3,7 @@ import User from '../models/userModel';
 export async function getUser(request, response) {
 	try {
 		const {userId} = request.query;
-		const user = await User.find({email: userId});
+		const user = await User.find({email: userId}).populate('ingredients');
 		response.status(200).json(user);
 	} catch {
 		response.status(404).json({error: 'Cannot get the User'});
