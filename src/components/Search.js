@@ -1,10 +1,10 @@
-import useStore from '../hooks/useStore';
+import ingredientsStore from '../hooks/ingredientsStore';
 
 import {SearchBar, SearchContainer, SearchInput} from './styled/Search.styled';
 
 export default function Search() {
-	const setSearchItem = useStore(state => state.setSearchItem);
-	const searchItem = useStore(state => state.searchItem);
+	const setSearchItem = ingredientsStore(state => state.setSearchItem);
+	const searchItem = ingredientsStore(state => state.searchItem);
 
 	return (
 		<SearchBar>
@@ -17,8 +17,8 @@ export default function Search() {
 						setSearchItem(search);
 					}}
 					type="search"
-					name="search Ingredient"
-					label="search Ingredients"
+					name="search"
+					label="search"
 				/>
 			</SearchContainer>
 		</SearchBar>

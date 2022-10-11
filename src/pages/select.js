@@ -4,15 +4,15 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 
 import Layout from '../components/Layout';
+import Search from '../components/Search';
 import {IngredientCard, IngredientGrid} from '../components/styled/IngredientCard.styled';
 import ingredientsStore from '../hooks/ingredientsStore';
 
 export default function BarPage() {
 	const {data: session} = useSession();
-	//const ingredients = ingredientsStore(state => state.ingredients);
 	const fetchIngredients = ingredientsStore(state => state.fetchIngredients);
 	const ingredients = ingredientsStore(state => state.ingredients);
-
+	const searchItem = ingredientsStore(state => state.searchItem);
 	const [moreIngredients, setMoreIngredients] = useState([]);
 
 	useEffect(() => {
@@ -33,9 +33,10 @@ export default function BarPage() {
 				<title key="title">My Bar</title>
 				<meta key="description" name="description" content="About" />
 			</Head>
+			<Search></Search>
 			<IngredientGrid>
 				{ingredients.map(ingredient => {
-					return (
+					return ingredient.name.includes(searchItem) ? (
 						<IngredientCard key={ingredient._id} color={ingredient.color}>
 							<p>{ingredient.name}</p>
 							<button
@@ -47,7 +48,7 @@ export default function BarPage() {
 								add
 							</button>
 						</IngredientCard>
-					);
+					) : undefined;
 				})}
 			</IngredientGrid>
 

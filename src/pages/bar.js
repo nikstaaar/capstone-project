@@ -4,6 +4,7 @@ import Link from 'next/link';
 import {useEffect} from 'react';
 
 import Layout from '../components/Layout';
+import Search from '../components/Search';
 import {IngredientGrid, IngredientCard} from '../components/styled/IngredientCard.styled';
 import ingredientsStore from '../hooks/ingredientsStore';
 
@@ -24,6 +25,7 @@ export default function BarPage() {
 				<title key="title">My Bar</title>
 				<meta key="description" name="description" content="About" />
 			</Head>
+			<Search></Search>
 			<IngredientGrid>
 				{!savedIngredients && <>There are no Ingredients in your Bar</>}
 				{savedIngredients?.map(ingredient => {
