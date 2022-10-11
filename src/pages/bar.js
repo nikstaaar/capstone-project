@@ -4,6 +4,7 @@ import Link from 'next/link';
 import {useEffect} from 'react';
 
 import Layout from '../components/Layout';
+import {IngredientGrid, IngredientCard} from '../components/styled/IngredientCard.styled';
 import ingredientsStore from '../hooks/ingredientsStore';
 
 export default function BarPage() {
@@ -12,8 +13,10 @@ export default function BarPage() {
 	const savedIngredients = ingredientsStore(state => state.savedIngredients);
 
 	useEffect(() => {
-		fetchSavedIngredients(`/api/users/${session.user.email}`);
-	}, [fetchSavedIngredients]);
+		if (session) {
+			fetchSavedIngredients(`/api/users/${session.user.email}`);
+		}
+	}, [fetchSavedIngredients, session]);
 
 	return (
 		<Layout>
@@ -21,16 +24,17 @@ export default function BarPage() {
 				<title key="title">My Bar</title>
 				<meta key="description" name="description" content="About" />
 			</Head>
-			<h1>Hi</h1>
-			<button
-				onClick={() => {
-					console.log(savedIngredients);
-				}}
-			>
-				click
-			</button>
-
-			<Link href="/select">Add more Ingredients</Link>
+			<IngredientGrid>
+				{!savedIngredients && <>There are no Ingredients in your Bar</>}
+				<Link href="/select">Add more Ingredients</Link>
+				{savedIngredients?.map(ingredient => {
+					return (
+						<IngredientCard key={ingredient._id} color={ingredient.color}>
+							<p>{ingredient.name}</p>
+						</IngredientCard>
+					);
+				})}
+			</IngredientGrid>
 		</Layout>
 	);
 }

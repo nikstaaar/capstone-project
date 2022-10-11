@@ -4,12 +4,15 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 
 import Layout from '../components/Layout';
+import {IngredientCard, IngredientGrid} from '../components/styled/IngredientCard.styled';
 import ingredientsStore from '../hooks/ingredientsStore';
 
 export default function BarPage() {
 	const {data: session} = useSession();
 	//const ingredients = ingredientsStore(state => state.ingredients);
 	const fetchIngredients = ingredientsStore(state => state.fetchIngredients);
+	const ingredients = ingredientsStore(state => state.ingredients);
+
 	const [moreIngredients, setMoreIngredients] = useState([]);
 
 	useEffect(() => {
@@ -30,16 +33,24 @@ export default function BarPage() {
 				<title key="title">My Bar</title>
 				<meta key="description" name="description" content="About" />
 			</Head>
-			<h1>Hi</h1>
-			<button
-				onClick={() => {
-					setMoreIngredients();
-				}}
-			>
-				add
-			</button>
+			<IngredientGrid>
+				{ingredients.map(ingredient => {
+					return (
+						<IngredientCard key={ingredient._id} color={ingredient.color}>
+							<p>{ingredient.name}</p>
+							<button
+								onClick={() => {
+									setMoreIngredients([...moreIngredients, ingredient._id]);
+								}}
+							>
+								add
+							</button>
+						</IngredientCard>
+					);
+				})}
+			</IngredientGrid>
+
 			<button onClick={update}>save</button>
-			<button onClick={console.log(moreIngredients)}>log</button>
 		</Layout>
 	);
 }

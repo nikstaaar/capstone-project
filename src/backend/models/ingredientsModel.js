@@ -2,8 +2,10 @@ import {Schema, model, models} from 'mongoose';
 
 const ingredientsSchema = new Schema({
 	name: String,
+	description: String,
+	alcoholic: Boolean,
 	color: String,
-	saved: Boolean,
+	image: String,
 });
 
 const Ingredients = models.Ingredients || model('Ingredients', ingredientsSchema);

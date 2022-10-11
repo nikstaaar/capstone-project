@@ -1,11 +1,13 @@
 import mongoose, {Schema, model, models} from 'mongoose';
 
+import './ingredientsModel';
+
 const userSchema = new Schema({
 	name: String,
 	userName: String,
 	email: String,
 	image: String,
-	ingredients: [{type: mongoose.Schema.Types.ObjectId, ref: 'ingredients'}],
+	ingredients: [{type: mongoose.Schema.Types.ObjectId, ref: 'Ingredients'}],
 	createdAt: String,
 });
 

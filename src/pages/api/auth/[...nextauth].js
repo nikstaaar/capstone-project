@@ -44,7 +44,7 @@ if (process.env.VERCEL_ENV === 'preview') {
 					ingredients: [
 						{
 							type: mongoose.Schema.Types.ObjectId,
-							ref: 'ingredients',
+							ref: 'Ingredients',
 						},
 					],
 					createdAt: date,
