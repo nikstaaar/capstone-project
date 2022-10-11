@@ -12,6 +12,7 @@ export default function BarPage() {
 	const {data: session} = useSession();
 	const fetchSavedIngredients = ingredientsStore(state => state.fetchSavedIngredients);
 	const savedIngredients = ingredientsStore(state => state.savedIngredients);
+	const searchItem = ingredientsStore(state => state.searchItem);
 
 	useEffect(() => {
 		if (session) {
@@ -29,11 +30,13 @@ export default function BarPage() {
 			<IngredientGrid>
 				{!savedIngredients && <>There are no Ingredients in your Bar</>}
 				{savedIngredients?.map(ingredient => {
-					return (
+					return ingredient.name
+						.toLowerCase()
+						.includes(searchItem.toString().toLowerCase()) ? (
 						<IngredientCard key={ingredient._id} color={ingredient.color}>
 							<p>{ingredient.name}</p>
 						</IngredientCard>
-					);
+					) : undefined;
 				})}
 			</IngredientGrid>
 			<Link href="/select">Add more Ingredients</Link>

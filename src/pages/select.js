@@ -14,6 +14,12 @@ export default function BarPage() {
 	const ingredients = ingredientsStore(state => state.ingredients);
 	const searchItem = ingredientsStore(state => state.searchItem);
 	const [moreIngredients, setMoreIngredients] = useState([]);
+	const fetchSavedIngredients = ingredientsStore(state => state.fetchSavedIngredients);
+	useEffect(() => {
+		if (session) {
+			fetchSavedIngredients(`/api/users/${session.user.email}`);
+		}
+	}, [fetchSavedIngredients, session]);
 
 	useEffect(() => {
 		fetchIngredients('/api/mongoIngredients');
@@ -36,7 +42,9 @@ export default function BarPage() {
 			<Search></Search>
 			<IngredientGrid>
 				{ingredients.map(ingredient => {
-					return ingredient.name.includes(searchItem) ? (
+					return ingredient.name
+						.toLowerCase()
+						.includes(searchItem.toString().toLowerCase()) ? (
 						<IngredientCard key={ingredient._id} color={ingredient.color}>
 							<p>{ingredient.name}</p>
 							<button
