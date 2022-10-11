@@ -3,6 +3,11 @@ import create from 'zustand';
 const ingredientsStore = create(set => ({
 	ingredients: [],
 	savedIngredients: [],
+	searchItem: [],
+
+	setSearchItem: item => {
+		set({searchItem: item});
+	},
 
 	fetchIngredients: async url => {
 		try {
