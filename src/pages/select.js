@@ -6,7 +6,10 @@ import {useEffect} from 'react';
 import Check from '../components/Check';
 import Layout from '../components/Layout';
 import Search from '../components/Search';
-import {IngredientCard, IngredientGrid} from '../components/styled/IngredientCard.styled';
+import {
+	StyledIngredientCard,
+	StyledIngredientGrid,
+} from '../components/styled/IngredientCard.styled';
 import ingredientsStore from '../hooks/ingredientsStore';
 
 export default function BarPage() {
@@ -49,23 +52,23 @@ export default function BarPage() {
 				<meta key="description" name="description" content="About" />
 			</Head>
 			<Search></Search>
-			<IngredientGrid>
+			<StyledIngredientGrid>
 				{ingredients.map(ingredient => {
 					const saved = savedIngredientsNames?.includes(ingredient.name);
 					return ingredient.name
 						.toLowerCase()
 						.includes(searchItem.toString().toLowerCase()) ? (
-						<IngredientCard key={ingredient._id} color={ingredient.color}>
+						<StyledIngredientCard key={ingredient._id} color={ingredient.color}>
 							<p>{ingredient.name}</p>
 							<Check
 								saved={saved}
 								ingredient={ingredient._id}
 								moreIngredients={moreIngredients}
 							></Check>
-						</IngredientCard>
+						</StyledIngredientCard>
 					) : undefined;
 				})}
-			</IngredientGrid>
+			</StyledIngredientGrid>
 			<Link href="/bar">
 				<button onClick={update}>save</button>
 			</Link>

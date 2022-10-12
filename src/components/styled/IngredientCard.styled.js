@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const IngredientGrid = styled.ul`
+export const StyledIngredientGrid = styled.ul`
 	display: grid;
 	grid-auto-rows: 190px;
 	grid-column-gap: 15px;
@@ -9,7 +9,7 @@ export const IngredientGrid = styled.ul`
 	list-style: none;
 `;
 
-export const IngredientCard = styled.li`
+export const StyledIngredientCard = styled.li`
 	width: 100%;
 	height: 190px;
 	border-radius: 10px;

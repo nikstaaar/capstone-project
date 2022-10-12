@@ -3,9 +3,10 @@ import Head from 'next/head';
 import Link from 'next/link';
 import {useEffect} from 'react';
 
+import IngredientCard from '../components/IngredientCard';
 import Layout from '../components/Layout';
 import Search from '../components/Search';
-import {IngredientGrid, IngredientCard} from '../components/styled/IngredientCard.styled';
+import {StyledIngredientGrid} from '../components/styled/IngredientCard.styled';
 import ingredientsStore from '../hooks/ingredientsStore';
 
 export default function BarPage() {
@@ -27,18 +28,16 @@ export default function BarPage() {
 				<meta key="description" name="description" content="About" />
 			</Head>
 			<Search></Search>
-			<IngredientGrid>
+			<StyledIngredientGrid>
 				{!savedIngredients && <>There are no Ingredients in your Bar</>}
 				{savedIngredients?.map(ingredient => {
 					return ingredient.name
 						.toLowerCase()
 						.includes(searchItem.toString().toLowerCase()) ? (
-						<IngredientCard key={ingredient._id} color={ingredient.color}>
-							<p>{ingredient.name}</p>
-						</IngredientCard>
+						<IngredientCard ingredient={ingredient}></IngredientCard>
 					) : undefined;
 				})}
-			</IngredientGrid>
+			</StyledIngredientGrid>
 			<Link href="/select">Add more Ingredients</Link>
 		</Layout>
 	);
