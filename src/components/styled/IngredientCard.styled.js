@@ -19,7 +19,7 @@ export const StyledIngredientCard = styled(motion.li)`
 		expanded
 			? `
 		padding: 1em;
-		grid-column: auto / span 3;
+		grid-column: auto / span 2;
 		grid-row: auto / span 2;
   `
 			: `padding: 0.4em`};
