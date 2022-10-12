@@ -5,7 +5,6 @@ import {useEffect} from 'react';
 
 import Layout from '../components/Layout';
 import Search from '../components/Search';
-import {IngredientGrid} from '../components/styled/IngredientCard.styled';
 import cocktailsStore from '../hooks/cocktailsStore';
 import ingredientsStore from '../hooks/ingredientsStore';
 
@@ -27,11 +26,11 @@ export default function CocktailPage() {
 		fetchCocktails('/api/cocktails');
 	}, [fetchCocktails]);
 
-	const ingredientNames = savedIngredients.map(ingredient => {
+	const ingredientNames = savedIngredients?.map(ingredient => {
 		return ingredient.name;
 	});
 	const isAvailable = currentIngredient => {
-		return ingredientNames.includes(currentIngredient);
+		return ingredientNames?.includes(currentIngredient);
 	};
 
 	return (
@@ -41,25 +40,22 @@ export default function CocktailPage() {
 				<meta key="description" name="description" content="About" />
 			</Head>
 			<Search></Search>
-			<IngredientGrid>
-				{cocktails.map(cocktail => {
-					const ingredients = cocktail.ingredients.names;
-					return cocktail.name
-						.toLowerCase()
-						.includes(searchItem.toString().toLowerCase()) &&
-						ingredients.every(isAvailable) ? (
-						<li key={cocktail.id}>
-							{cocktail.name}
-							<Image
-								src={cocktail.image}
-								alt={cocktail.name}
-								width="100px"
-								height="100px"
-							></Image>
-						</li>
-					) : undefined;
-				})}
-			</IngredientGrid>
+
+			{cocktails.map(cocktail => {
+				const ingredients = cocktail.ingredients.names;
+				return cocktail.name.toLowerCase().includes(searchItem.toString().toLowerCase()) &&
+					ingredients.every(isAvailable) ? (
+					<li key={cocktail.id}>
+						{cocktail.name}
+						<Image
+							src={cocktail.image}
+							alt={cocktail.name}
+							width="100px"
+							height="100px"
+						></Image>
+					</li>
+				) : undefined;
+			})}
 		</Layout>
 	);
 }
