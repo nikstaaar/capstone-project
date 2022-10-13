@@ -3,7 +3,12 @@ const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
-		domains: ['www.thecocktaildb.com', 'source.unsplash.com'],
+		domains: [
+			'www.thecocktaildb.com',
+			'source.unsplash.com',
+			'images.pexels.com',
+			'images.unsplash.com',
+		],
 	},
 };
 

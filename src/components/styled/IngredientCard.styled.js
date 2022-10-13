@@ -7,11 +7,16 @@ export const StyledIngredientGrid = styled.ul`
 	grid-auto-rows: 190px;
 	grid-column-gap: 15px;
 	grid-row-gap: 15px;
-	grid-template-columns: repeat(auto-fit, minmax(80px, 100px));
+	grid-template-columns: repeat(auto-fit, minmax(100px, 100px));
+	align-self: center;
+	width: 100%;
+	padding-right: 2%;
+	padding-left: 6%;
 	list-style: none;
 `;
 
 export const StyledIngredientCard = styled(motion.li)`
+	position: relative;
 	width: 100%;
 	border-radius: 0.55rem;
 	background-color: ${props => props.color};

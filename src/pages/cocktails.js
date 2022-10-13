@@ -2,9 +2,12 @@ import {useSession} from 'next-auth/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import {useEffect} from 'react';
+import styled from 'styled-components';
 
 import Layout from '../components/Layout';
 import Search from '../components/Search';
+import {StyledCocktailCard} from '../components/styled/CocktailCard.styled';
+import {CocktailsWrapper} from '../components/styled/CocktailsWrapper.styled';
 import cocktailsStore from '../hooks/cocktailsStore';
 import ingredientsStore from '../hooks/ingredientsStore';
 
@@ -15,6 +18,12 @@ export default function CocktailPage() {
 	const fetchSavedIngredients = ingredientsStore(state => state.fetchSavedIngredients);
 	const savedIngredients = ingredientsStore(state => state.savedIngredients);
 	const searchItem = ingredientsStore(state => state.searchItem);
+
+	const StyledImage = styled(Image)`
+		position: absolute;
+		bottom: 10px;
+		border-radius: 0.45rem;
+	`;
 
 	useEffect(() => {
 		if (session) {
@@ -40,22 +49,25 @@ export default function CocktailPage() {
 				<meta key="description" name="description" content="About" />
 			</Head>
 			<Search></Search>
-
-			{cocktails.map(cocktail => {
-				const ingredients = cocktail.ingredients.names;
-				return cocktail.name.toLowerCase().includes(searchItem.toString().toLowerCase()) &&
-					ingredients.every(isAvailable) ? (
-					<li key={cocktail.id}>
-						{cocktail.name}
-						<Image
-							src={cocktail.image}
-							alt={cocktail.name}
-							width="100px"
-							height="100px"
-						></Image>
-					</li>
-				) : undefined;
-			})}
+			<CocktailsWrapper>
+				{cocktails.map(cocktail => {
+					const ingredients = cocktail.ingredients.names;
+					return cocktail.name
+						.toLowerCase()
+						.includes(searchItem.toString().toLowerCase()) &&
+						ingredients.every(isAvailable) ? (
+						<StyledCocktailCard key={cocktail.id}>
+							<StyledImage
+								src={cocktail.image}
+								alt={cocktail.name}
+								width="70px"
+								height="70px"
+							></StyledImage>
+							<h4>{cocktail.name}</h4>
+						</StyledCocktailCard>
+					) : undefined;
+				})}
+			</CocktailsWrapper>
 		</Layout>
 	);
 }

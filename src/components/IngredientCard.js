@@ -30,8 +30,8 @@ export default function IngredientCard({ingredient}) {
 			</StyledTitle>
 
 			<StyledImage
-				src="https://source.unsplash.com/yU9TNvk_jI8/w=600"
-				alt="image"
+				src={ingredient.image}
+				alt={ingredient.name}
 				width="100px"
 				height="147em"
 			/>

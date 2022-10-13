@@ -7,6 +7,7 @@ import Layout from '../components/Layout';
 import Search from '../components/Search';
 import SelectCard from '../components/SelectCard';
 import {StyledIngredientGrid} from '../components/styled/IngredientCard.styled';
+import {MoreButton} from '../components/styled/MoreButton.styled';
 import ingredientsStore from '../hooks/ingredientsStore';
 
 export default function BarPage() {
@@ -47,7 +48,7 @@ export default function BarPage() {
 				})}
 			</StyledIngredientGrid>
 			<Link href="/bar">
-				<button onClick={update}>save</button>
+				<MoreButton onClick={update}>save</MoreButton>
 			</Link>
 			<Link href="/bar">cancel</Link>
 		</Layout>

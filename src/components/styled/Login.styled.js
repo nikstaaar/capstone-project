@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-export const StyledButton = styled.button`
+export const StyledLogin = styled.button`
 	display: inline-block;
 	position: absolute;
+	top: 200%;
 	width: 70px;
 	height: 10px;
 	padding: 5px 5px 18px;
@@ -19,18 +20,4 @@ export const StyledButton = styled.button`
 	text-align: center;
 	text-transform: uppercase;
 	white-space: normal;
-	cursor: pointer;
-	${({saved}) =>
-		saved &&
-		`background-color: hsla(0, 0%, 0%, 0);
-	color: black;
-	border-color: black;`}
-	${({expanded}) =>
-		expanded
-			? `
-			top: 5px;
-			right: 5px;
-  `
-			: `	bottom: 5px;
-				right 15.5%`};
 `;
