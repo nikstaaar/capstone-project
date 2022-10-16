@@ -51,12 +51,16 @@ export default function SelectCard({ingredient}) {
 			layout
 		>
 			<StyledTitle expanded={isExpanded}>{ingredient.name}</StyledTitle>
-			<StyledImage
-				src={ingredient.image}
-				alt={ingredient.name}
-				width="100px"
-				height="147em"
-			/>
+			<div>
+				<StyledImage
+					src={ingredient.image}
+					alt={ingredient.name}
+					unoptimized={true}
+					width="100px"
+					height="147px"
+				/>
+			</div>
+
 			{!isSaved ? (
 				<StyledButton
 					expanded={isExpanded}
