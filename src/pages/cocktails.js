@@ -1,6 +1,7 @@
 import {useSession} from 'next-auth/react';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import {useEffect} from 'react';
 import styled from 'styled-components';
 
@@ -56,15 +57,17 @@ export default function CocktailPage() {
 						.toLowerCase()
 						.includes(searchItem.toString().toLowerCase()) &&
 						ingredients.every(isAvailable) ? (
-						<StyledCocktailCard key={cocktail.id}>
-							<StyledImage
-								src={cocktail.image}
-								alt={cocktail.name}
-								width="70px"
-								height="70px"
-							></StyledImage>
-							<h4>{cocktail.name}</h4>
-						</StyledCocktailCard>
+						<Link href={`/details/${cocktail.id}`}>
+							<StyledCocktailCard key={cocktail.id} onClick={() => {}}>
+								<h4>{cocktail.name}</h4>
+								<StyledImage
+									src={cocktail.image}
+									alt={cocktail.name}
+									width="70px"
+									height="70px"
+								></StyledImage>
+							</StyledCocktailCard>
+						</Link>
 					) : undefined;
 				})}
 			</CocktailsWrapper>
