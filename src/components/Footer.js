@@ -1,15 +1,36 @@
 import Link from 'next/link';
 
-export default function Footer() {
+import {LinkWrapper} from './styled/LinkWrapper.styled';
+import {StyledNav} from './styled/Nav.styled';
+export default function Footer(request) {
+	const page = request.query;
+	{
+		console.log(page);
+	}
 	return (
 		<footer>
-			<nav>
-				<Link href="/">Home</Link>
-				<Link href="/about">About me</Link>
-				<Link href="/bar">My Bar</Link>
-				<Link href="/cocktails">Cocktails</Link>
-			</nav>
-			<div>© 2022 by Me</div>
+			<StyledNav>
+				<LinkWrapper>
+					<Link href="/">
+						<h4>Home</h4>
+					</Link>
+				</LinkWrapper>
+				<LinkWrapper>
+					<Link href="/about">
+						<h4>About</h4>
+					</Link>
+				</LinkWrapper>
+				<LinkWrapper>
+					<Link href="/bar">
+						<h4>My Bar</h4>
+					</Link>
+				</LinkWrapper>
+				<LinkWrapper>
+					<Link href="/cocktails">
+						<h4>Cocktails</h4>
+					</Link>
+				</LinkWrapper>
+			</StyledNav>
 		</footer>
 	);
 }

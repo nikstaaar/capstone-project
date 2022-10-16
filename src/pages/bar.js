@@ -7,6 +7,7 @@ import IngredientCard from '../components/IngredientCard';
 import Layout from '../components/Layout';
 import Search from '../components/Search';
 import {StyledIngredientGrid} from '../components/styled/IngredientCard.styled';
+import {MoreButton} from '../components/styled/MoreButton.styled';
 import ingredientsStore from '../hooks/ingredientsStore';
 
 export default function BarPage() {
@@ -14,6 +15,11 @@ export default function BarPage() {
 	const fetchSavedIngredients = ingredientsStore(state => state.fetchSavedIngredients);
 	const savedIngredients = ingredientsStore(state => state.savedIngredients);
 	const searchItem = ingredientsStore(state => state.searchItem);
+	const setSearchItem = ingredientsStore(state => state.setSearchItem);
+
+	useEffect(() => {
+		setSearchItem('');
+	}, []);
 
 	useEffect(() => {
 		if (session) {
@@ -38,7 +44,11 @@ export default function BarPage() {
 					) : undefined;
 				})}
 			</StyledIngredientGrid>
-			<Link href="/select">Add more Ingredients</Link>
+			<MoreButton>
+				<Link href="/select">
+					<h2>ADD</h2>
+				</Link>
+			</MoreButton>
 		</Layout>
 	);
 }

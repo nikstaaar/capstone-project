@@ -5,13 +5,14 @@ import styled from 'styled-components';
 
 import ingredientsStore from '../hooks/ingredientsStore';
 
+import {StyledButton} from './styled/Button.styled';
 import {StyledIngredientCard} from './styled/IngredientCard.styled';
 import {TextWrapper} from './styled/TextWrapper.styled';
 import {StyledTitle} from './styled/Title.styled';
 
 const StyledImage = styled(Image)`
 	position: relative;
-	top: 50%;
+	top: 390px;
 	border-radius: 0.55rem;
 `;
 
@@ -50,30 +51,37 @@ export default function SelectCard({ingredient}) {
 			layout
 		>
 			<StyledTitle expanded={isExpanded}>{ingredient.name}</StyledTitle>
-			<StyledImage
-				src="https://source.unsplash.com/yU9TNvk_jI8/w=600"
-				alt="image"
-				width="100px"
-				height="147em"
-			/>
+			<div>
+				<StyledImage
+					src={ingredient.image}
+					alt={ingredient.name}
+					unoptimized={true}
+					width="100px"
+					height="147px"
+				/>
+			</div>
+
 			{!isSaved ? (
-				<button
+				<StyledButton
+					expanded={isExpanded}
 					onClick={event => {
 						event.stopPropagation();
 						addMoreIngredients(moreIngredients, ingredient._id), setIsSaved(true);
 					}}
 				>
-					save this ingredient
-				</button>
+					save
+				</StyledButton>
 			) : (
-				<button
+				<StyledButton
+					expanded={isExpanded}
+					saved={isSaved}
 					onClick={event => {
 						event.stopPropagation();
 						removeMoreIngredients(moreIngredients, ingredient._id), setIsSaved(false);
 					}}
 				>
 					saved
-				</button>
+				</StyledButton>
 			)}
 			{isExpanded ? (
 				<TextWrapper
