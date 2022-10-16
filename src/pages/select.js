@@ -28,9 +28,6 @@ export default function BarPage() {
 			body: JSON.stringify(moreIngredients),
 		});
 	}
-	{
-		console.log(moreIngredients);
-	}
 	return (
 		<Layout>
 			<Head>

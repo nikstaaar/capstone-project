@@ -13,7 +13,7 @@ export default async function handler(request, response) {
 			response.status(200).json({method, name: 'PUT Request'});
 			break;
 		default:
-			response.setHeader('Allow', ['GET', 'PUT']);
+			response.setHeader('Allow', ['GET', 'PUT', 'DEL']);
 			response.status(405).end(`Method${method} Not Allowed`);
 	}
 }
