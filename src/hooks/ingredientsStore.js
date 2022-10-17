@@ -14,7 +14,9 @@ const ingredientsStore = create(set => ({
 		});
 	},
 	addMoreIngredients: (ingredients, ingredient) => {
-		set({moreIngredients: [...ingredients, ingredient]});
+		if (ingredients) {
+			set({moreIngredients: [...ingredients, ingredient]});
+		} else set({moreIngredients: ingredient});
 	},
 	setSearchItem: item => {
 		set({searchItem: item});
