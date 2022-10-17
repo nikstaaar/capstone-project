@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const SearchBar = styled.div`
 	display: flex;
 	justify-content: space-evenly;
+	margin-bottom: 1em;
 `;
 
 export const SearchContainer = styled.div`

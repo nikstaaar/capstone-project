@@ -1,6 +1,6 @@
 import {useSession} from 'next-auth/react';
 import Image from 'next/image';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components';
 
 import ingredientsStore from '../hooks/ingredientsStore';
@@ -9,34 +9,27 @@ import {DeleteButton} from './styled/DeleteButton.styled copy';
 import {StyledIngredientCard} from './styled/IngredientCard.styled';
 import {TextWrapper} from './styled/TextWrapper.styled';
 import {StyledTitle} from './styled/Title.styled';
-
-const StyledImage = styled(Image)`
-	position: relative;
-	top: 50%;
-	border-radius: 0.55rem;
-`;
+import {TitleWrapper} from './styled/TitleWrapper.styled';
 
 export default function IngredientCard({ingredient}) {
 	const savedIngredients = ingredientsStore(state => state.savedIngredients);
-	const fetchSavedIngredients = ingredientsStore(state => state.fetchSavedIngredients);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const {data: session} = useSession();
-	const [newIngredients, setNewIngredients] = useState(savedIngredients);
+	const newIngredients = savedIngredients.filter(newIngredients => newIngredients !== ingredient);
 
-	async function update(body) {
+	async function update() {
 		await fetch(`/api/users/${session.user.email}`, {
 			method: 'PUT',
 			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify(body),
+			body: JSON.stringify(newIngredients),
 		});
 	}
 	function refreshPage() {
 		window.location.reload(false);
 	}
-	useEffect(() => {
-		update(newIngredients), fetchSavedIngredients(`/api/users/${session.user.email}`);
-	}, [newIngredients]);
-
+	const StyledImage = styled(Image)`
+		border-radius: 0.55em;
+	`;
 	return (
 		<StyledIngredientCard
 			onClick={() => {
@@ -48,21 +41,22 @@ export default function IngredientCard({ingredient}) {
 			transition={{layout: {duration: 1, type: 'spring'}}}
 			layout
 		>
-			<StyledTitle layout="position" expanded={isExpanded}>
-				{ingredient.name}
-			</StyledTitle>
+			<TitleWrapper>
+				<StyledTitle layout="position" expanded={isExpanded}>
+					{ingredient.name}
+				</StyledTitle>
+			</TitleWrapper>
 			<DeleteButton
 				onClick={event => {
-					event.stopPropagation(),
-						setNewIngredients(
-							savedIngredients.filter(newIngredients => newIngredients !== ingredient)
-						),
-						refreshPage();
+					event.stopPropagation(), update();
+					refreshPage();
 				}}
 			>
 				X
 			</DeleteButton>
+
 			<StyledImage
+				layout="responsive"
 				src={ingredient.image}
 				alt={ingredient.name}
 				width="100px"

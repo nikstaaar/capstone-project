@@ -16,8 +16,11 @@ export const StyledIngredientGrid = styled.ul`
 `;
 
 export const StyledIngredientCard = styled(motion.li)`
+	display: flex;
 	position: relative;
+	flex-direction: column;
 	width: 100%;
+	row-gap: 10px;
 	border-radius: 0.55rem;
 	background-color: ${props => props.color};
 	${({expanded}) =>
@@ -25,7 +28,7 @@ export const StyledIngredientCard = styled(motion.li)`
 			? `
 		padding: 1em;
 		grid-column: auto / span 2;
-		grid-row: auto / span 2;
+		grid-row: auto / span 3;
   `
 			: `padding: 0.4em`};
 	${({clicked}) =>

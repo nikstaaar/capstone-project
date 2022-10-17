@@ -6,6 +6,8 @@ import {useEffect} from 'react';
 import styled from 'styled-components';
 
 import Layout from '../../components/Layout';
+import {PageWrapper} from '../../components/styled/PageWrapper.styled';
+import {Wrapper} from '../../components/styled/Wrapper.styled';
 import cocktailsStore from '../../hooks/cocktailsStore';
 const Details = () => {
 	const fetchCocktails = cocktailsStore(state => state.fetchCocktails);
@@ -16,11 +18,8 @@ const Details = () => {
 	useEffect(() => {
 		fetchCocktails('/api/cocktails');
 	}, [fetchCocktails]);
-	console.log(cocktail);
 
 	const StyledImage = styled(Image)`
-		position: absolute;
-		bottom: 10px;
 		border-radius: 0.45rem;
 	`;
 	return (
@@ -29,7 +28,7 @@ const Details = () => {
 				<title key="title">My Bar</title>
 				<meta key="description" name="description" content="About" />
 			</Head>
-			<div>
+			<PageWrapper>
 				<h3>{cocktail?.name}</h3>
 				<StyledImage
 					src={cocktail?.image}
@@ -37,19 +36,23 @@ const Details = () => {
 					width="300%"
 					height="300%"
 				></StyledImage>
-				<div>
-					<p>ingredients:</p>
-					{cocktail?.ingredients.names.map(name => {
-						return <p key={nanoid()}>{name}</p>;
-					})}
-					<p>ingredients:</p>
-					{cocktail?.ingredients.measurements.map(measurement => {
-						return <p key={nanoid()}>{measurement}</p>;
-					})}
-				</div>
+				<Wrapper>
+					<div>
+						<h4>Ingredients:</h4>
+						{cocktail?.ingredients.names.map(name => {
+							return <p key={nanoid()}>{name}</p>;
+						})}
+					</div>
+					<div>
+						<h4>Measurements:</h4>
+						{cocktail?.ingredients.measurements.map(measurement => {
+							return <p key={nanoid()}>{measurement}</p>;
+						})}
+					</div>
+				</Wrapper>
 				<h4>Details:</h4>
 				<p>{cocktail?.instructions}</p>
-			</div>
+			</PageWrapper>
 		</Layout>
 	);
 };

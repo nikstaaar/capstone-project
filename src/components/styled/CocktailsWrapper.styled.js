@@ -4,7 +4,7 @@ export const CocktailsWrapper = styled.ul`
 	display: flex;
 	position: relative;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: start;
 	padding-right: 2%;
 	padding-left: 2%;
 	column-gap: 7px;

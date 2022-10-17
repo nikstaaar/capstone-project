@@ -9,12 +9,7 @@ import {StyledButton} from './styled/Button.styled';
 import {StyledIngredientCard} from './styled/IngredientCard.styled';
 import {TextWrapper} from './styled/TextWrapper.styled';
 import {StyledTitle} from './styled/Title.styled';
-
-const StyledImage = styled(Image)`
-	position: relative;
-	top: 390px;
-	border-radius: 0.55rem;
-`;
+import {TitleWrapper} from './styled/TitleWrapper.styled';
 
 export default function SelectCard({ingredient}) {
 	const {data: session} = useSession();
@@ -37,7 +32,9 @@ export default function SelectCard({ingredient}) {
 			setMoreIngredients(savedIngredientsIds);
 		}
 	}, [fetchSavedIngredients, session]);
-
+	const StyledImage = styled(Image)`
+		border-radius: 0.55rem;
+	`;
 	return (
 		<StyledIngredientCard
 			onClick={() => {
@@ -50,16 +47,18 @@ export default function SelectCard({ingredient}) {
 			transition={{layout: {duration: 1, type: 'spring'}}}
 			layout
 		>
-			<StyledTitle expanded={isExpanded}>{ingredient.name}</StyledTitle>
-			<div>
-				<StyledImage
-					src={ingredient.image}
-					alt={ingredient.name}
-					unoptimized={true}
-					width="100px"
-					height="147px"
-				/>
-			</div>
+			<TitleWrapper>
+				<StyledTitle expanded={isExpanded}>{ingredient.name}</StyledTitle>
+			</TitleWrapper>
+
+			<StyledImage
+				layout="responsive"
+				src={ingredient.image}
+				alt={ingredient.name}
+				width="100px"
+				height="147px"
+				quality={30}
+			/>
 
 			{!isSaved ? (
 				<StyledButton

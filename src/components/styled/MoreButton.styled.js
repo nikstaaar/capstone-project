@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const MoreButton = styled.button`
 	display: inline-block;
 	position: fixed;
-	top: 70%;
+	top: ${props => props.top};
 	right: 7%;
 	width: 4.5em;
 	height: 4.5em;

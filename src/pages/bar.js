@@ -40,11 +40,14 @@ export default function BarPage() {
 					return ingredient.name
 						.toLowerCase()
 						.includes(searchItem.toString().toLowerCase()) ? (
-						<IngredientCard ingredient={ingredient}></IngredientCard>
+						<IngredientCard
+							key={ingredient._id}
+							ingredient={ingredient}
+						></IngredientCard>
 					) : undefined;
 				})}
 			</StyledIngredientGrid>
-			<MoreButton>
+			<MoreButton top="70%">
 				<Link href="/select">
 					<h2>ADD</h2>
 				</Link>

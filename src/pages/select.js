@@ -15,7 +15,12 @@ export default function BarPage() {
 	const fetchIngredients = ingredientsStore(state => state.fetchIngredients);
 	const ingredients = ingredientsStore(state => state.ingredients);
 	const searchItem = ingredientsStore(state => state.searchItem);
+	const setSearchItem = ingredientsStore(state => state.setSearchItem);
 	const moreIngredients = ingredientsStore(state => state.moreIngredients);
+
+	useEffect(() => {
+		setSearchItem('');
+	}, []);
 
 	useEffect(() => {
 		fetchIngredients('/api/mongoIngredients');
@@ -45,9 +50,13 @@ export default function BarPage() {
 				})}
 			</StyledIngredientGrid>
 			<Link href="/bar">
-				<MoreButton onClick={update}>save</MoreButton>
+				<MoreButton top="70%" onClick={update}>
+					save
+				</MoreButton>
 			</Link>
-			<Link href="/bar">cancel</Link>
+			<MoreButton top="80%">
+				<Link href="/bar">Back</Link>
+			</MoreButton>
 		</Layout>
 	);
 }

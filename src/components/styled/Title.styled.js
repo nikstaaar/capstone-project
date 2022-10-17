@@ -9,5 +9,5 @@ export const StyledTitle = styled(motion.h2)`
   `
 			: `
             
-            font-size: 76%`}
+            font-size: 76%`};
 `;

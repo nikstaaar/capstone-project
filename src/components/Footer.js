@@ -11,16 +11,6 @@ export default function Footer(request) {
 		<footer>
 			<StyledNav>
 				<LinkWrapper>
-					<Link href="/">
-						<h4>Home</h4>
-					</Link>
-				</LinkWrapper>
-				<LinkWrapper>
-					<Link href="/about">
-						<h4>About</h4>
-					</Link>
-				</LinkWrapper>
-				<LinkWrapper>
 					<Link href="/bar">
 						<h4>My Bar</h4>
 					</Link>
@@ -28,6 +18,11 @@ export default function Footer(request) {
 				<LinkWrapper>
 					<Link href="/cocktails">
 						<h4>Cocktails</h4>
+					</Link>
+				</LinkWrapper>
+				<LinkWrapper>
+					<Link href="/user">
+						<h4>Account</h4>
 					</Link>
 				</LinkWrapper>
 			</StyledNav>

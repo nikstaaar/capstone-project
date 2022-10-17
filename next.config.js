@@ -3,12 +3,14 @@ const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
+		minimumCacheTTL: 360,
 		domains: [
 			'www.thecocktaildb.com',
 			'source.unsplash.com',
 			'images.pexels.com',
 			'images.unsplash.com',
 			'res.cloudinary.com',
+			'avatars.githubusercontent.com',
 		],
 	},
 };
