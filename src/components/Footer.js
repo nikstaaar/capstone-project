@@ -2,11 +2,7 @@ import Link from 'next/link';
 
 import {LinkWrapper} from './styled/LinkWrapper.styled';
 import {StyledNav} from './styled/Nav.styled';
-export default function Footer(request) {
-	const page = request.query;
-	{
-		console.log(page);
-	}
+export default function Footer() {
 	return (
 		<footer>
 			<StyledNav>
