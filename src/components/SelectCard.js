@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import ingredientsStore from '../hooks/ingredientsStore';
 
 import {StyledButton} from './styled/Button.styled';
+import {ImageWrapper} from './styled/ImageWrapper.styled';
 import {StyledIngredientCard} from './styled/IngredientCard.styled';
 import {TextWrapper} from './styled/TextWrapper.styled';
 import {StyledTitle} from './styled/Title.styled';
@@ -50,16 +51,16 @@ export default function SelectCard({ingredient}) {
 			<TitleWrapper>
 				<StyledTitle expanded={isExpanded}>{ingredient.name}</StyledTitle>
 			</TitleWrapper>
-
-			<StyledImage
-				layout="responsive"
-				src={ingredient.image}
-				alt={ingredient.name}
-				width="100px"
-				height="147px"
-				quality={30}
-			/>
-
+			<ImageWrapper>
+				<StyledImage
+					layout="responsive"
+					src={ingredient.image}
+					alt={ingredient.name}
+					width="100px"
+					height="147px"
+					quality={30}
+				/>
+			</ImageWrapper>
 			{!isSaved ? (
 				<StyledButton
 					expanded={isExpanded}

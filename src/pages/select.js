@@ -45,7 +45,7 @@ export default function BarPage() {
 					return ingredient.name
 						.toLowerCase()
 						.includes(searchItem.toString().toLowerCase()) ? (
-						<SelectCard ingredient={ingredient}></SelectCard>
+						<SelectCard key={ingredient._id} ingredient={ingredient}></SelectCard>
 					) : undefined;
 				})}
 			</StyledIngredientGrid>

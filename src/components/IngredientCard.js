@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import ingredientsStore from '../hooks/ingredientsStore';
 
 import {DeleteButton} from './styled/DeleteButton.styled copy';
+import {ImageWrapper} from './styled/ImageWrapper.styled';
 import {StyledIngredientCard} from './styled/IngredientCard.styled';
 import {TextWrapper} from './styled/TextWrapper.styled';
 import {StyledTitle} from './styled/Title.styled';
@@ -54,15 +55,15 @@ export default function IngredientCard({ingredient}) {
 			>
 				X
 			</DeleteButton>
-
-			<StyledImage
-				layout="responsive"
-				src={ingredient.image}
-				alt={ingredient.name}
-				width="100px"
-				height="147px"
-			/>
-
+			<ImageWrapper>
+				<StyledImage
+					layout="responsive"
+					src={ingredient.image}
+					alt={ingredient.name}
+					width="100px"
+					height="147px"
+				/>
+			</ImageWrapper>
 			{isExpanded ? (
 				<TextWrapper
 					initial={{opacity: 0}}
