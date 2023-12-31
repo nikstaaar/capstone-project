@@ -28,13 +28,13 @@ export const StyledIngredientCard = styled(motion.li)`
 			? `
 		padding: 1em;
 		grid-column: auto / span 2;
-		grid-row: auto / span 3;
-  `
+		grid-row: auto / span 3;`
 			: `padding: 0.4em`};
 	${({clicked}) =>
-		clicked &&
-		`	border-style: solid;
-  			border-color: black;
-			opacity: 60%
-  `}
+		clicked
+			? `	
+		border-style: solid;
+  		border-color: black;
+		opacity: 60%`
+			: ''}
 `;

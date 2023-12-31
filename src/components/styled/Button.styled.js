@@ -21,16 +21,16 @@ export const StyledButton = styled.button`
 	white-space: normal;
 	cursor: pointer;
 	${({saved}) =>
-		saved &&
-		`background-color: hsla(0, 0%, 0%, 0);
+		saved
+			? `background-color: hsla(0, 0%, 0%, 0);
 	color: black;
-	border-color: black;`}
+	border-color: black;`
+			: ''};
 	${({expanded}) =>
 		expanded
 			? `
 			top: 5px;
-			right: 5px;
-  `
+			right: 5px;`
 			: `	bottom: 5px;
 				right 15.5%`};
 `;

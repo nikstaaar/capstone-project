@@ -14,23 +14,26 @@ import {TitleWrapper} from './styled/TitleWrapper.styled';
 
 export default function IngredientCard({ingredient}) {
 	const savedIngredients = ingredientsStore(state => state.savedIngredients);
+	const setSavedIngredients = ingredientsStore(state => state.setSavedIngredients);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const {data: session} = useSession();
-	const newIngredients = savedIngredients.filter(newIngredients => newIngredients !== ingredient);
 
 	async function update() {
+		const newIngredients = savedIngredients.filter(
+			newIngredients => newIngredients !== ingredient
+		);
+		setSavedIngredients(newIngredients);
 		await fetch(`/api/users/${session.user.email}`, {
 			method: 'PUT',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify(newIngredients),
 		});
 	}
-	function refreshPage() {
-		window.location.reload(false);
-	}
+
 	const StyledImage = styled(Image)`
 		border-radius: 0.55em;
 	`;
+
 	return (
 		<StyledIngredientCard
 			onClick={() => {
@@ -38,19 +41,18 @@ export default function IngredientCard({ingredient}) {
 			}}
 			key={ingredient._id}
 			color={ingredient.color}
-			expanded={isExpanded}
+			expanded={isExpanded ? true : undefined}
 			transition={{layout: {duration: 1, type: 'spring'}}}
 			layout
 		>
 			<TitleWrapper>
-				<StyledTitle layout="position" expanded={isExpanded}>
+				<StyledTitle layout="position" expanded={isExpanded ? true : undefined}>
 					{ingredient.name}
 				</StyledTitle>
 			</TitleWrapper>
 			<DeleteButton
 				onClick={event => {
 					event.stopPropagation(), update();
-					refreshPage();
 				}}
 			>
 				X

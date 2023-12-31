@@ -21,7 +21,9 @@ const ingredientsStore = create(set => ({
 	setSearchItem: item => {
 		set({searchItem: item});
 	},
-
+	setSavedIngredients: ingredients => {
+		set({savedIngredients: ingredients});
+	},
 	fetchIngredients: async url => {
 		try {
 			const response = await fetch(url);
@@ -32,7 +34,6 @@ const ingredientsStore = create(set => ({
 			console.error(`Upps das war ein Fehler: ${error}`);
 		}
 	},
-
 	fetchSavedIngredients: async url => {
 		try {
 			const response = await fetch(url);

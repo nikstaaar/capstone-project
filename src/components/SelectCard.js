@@ -43,13 +43,15 @@ export default function SelectCard({ingredient}) {
 			}}
 			key={ingredient._id}
 			color={ingredient.color}
-			clicked={clicked}
-			expanded={isExpanded}
+			clicked={clicked ? true : undefined}
+			expanded={isExpanded ? true : undefined}
 			transition={{layout: {duration: 1, type: 'spring'}}}
 			layout
 		>
 			<TitleWrapper>
-				<StyledTitle expanded={isExpanded}>{ingredient.name}</StyledTitle>
+				<StyledTitle expanded={isExpanded ? true : undefined}>
+					{ingredient.name}
+				</StyledTitle>
 			</TitleWrapper>
 			<ImageWrapper>
 				<StyledImage
@@ -63,7 +65,7 @@ export default function SelectCard({ingredient}) {
 			</ImageWrapper>
 			{!isSaved ? (
 				<StyledButton
-					expanded={isExpanded}
+					expanded={isExpanded ? true : undefined}
 					onClick={event => {
 						event.stopPropagation();
 						addMoreIngredients(moreIngredients, ingredient._id), setIsSaved(true);
@@ -73,8 +75,8 @@ export default function SelectCard({ingredient}) {
 				</StyledButton>
 			) : (
 				<StyledButton
-					expanded={isExpanded}
-					saved={isSaved}
+					expanded={isExpanded ? true : undefined}
+					saved={isSaved ? true : undefined}
 					onClick={event => {
 						event.stopPropagation();
 						removeMoreIngredients(moreIngredients, ingredient._id), setIsSaved(false);
