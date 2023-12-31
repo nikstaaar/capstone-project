@@ -1,8 +1,28 @@
 import Head from 'next/head';
+import {useEffect} from 'react';
 
 import Login from '../components/Login';
+import ingredientsStore from '../hooks/ingredientsStore';
 
 export default function HomePage() {
+	const ingredients = ingredientsStore(state => state.ingredients);
+	const fetchIngredients = ingredientsStore(state => state.fetchIngredients);
+
+	const imageURLsToPreload = ingredients.map(ingredient => ingredient.image);
+
+	useEffect(() => {
+		fetchIngredients('/api/mongoIngredients');
+	}, [fetchIngredients]);
+
+	function prefetchImage(url) {
+		const img = new Image();
+		img.src = url;
+	}
+
+	imageURLsToPreload.forEach(url => {
+		prefetchImage(url);
+	});
+
 	return (
 		<>
 			<Head>

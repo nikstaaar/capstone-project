@@ -48,7 +48,7 @@ export default function BarPage() {
 				})}
 			</StyledIngredientGrid>
 			<MoreButton top="70%">
-				<Link href="/select">
+				<Link href="/select" prefetch>
 					<h2>ADD</h2>
 				</Link>
 			</MoreButton>

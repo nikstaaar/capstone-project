@@ -49,13 +49,15 @@ export default function BarPage() {
 					) : undefined;
 				})}
 			</StyledIngredientGrid>
-			<Link href="/bar">
+			<Link href="/bar" prefetch>
 				<MoreButton top="70%" onClick={update}>
 					save
 				</MoreButton>
 			</Link>
 			<MoreButton top="80%">
-				<Link href="/bar">Back</Link>
+				<Link href="/bar" prefetch>
+					Back
+				</Link>
 			</MoreButton>
 		</Layout>
 	);

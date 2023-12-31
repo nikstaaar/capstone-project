@@ -61,6 +61,7 @@ export default function SelectCard({ingredient}) {
 					width="100px"
 					height="147px"
 					quality={30}
+					priority={true}
 				/>
 			</ImageWrapper>
 			{!isSaved ? (
