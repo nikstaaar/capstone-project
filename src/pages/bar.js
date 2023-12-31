@@ -19,7 +19,7 @@ export default function BarPage() {
 
 	useEffect(() => {
 		setSearchItem('');
-	}, []);
+	}, [setSearchItem]);
 
 	useEffect(() => {
 		if (session) {
@@ -48,7 +48,7 @@ export default function BarPage() {
 				})}
 			</StyledIngredientGrid>
 			<MoreButton top="70%">
-				<Link href="/select" prefetch>
+				<Link href="/select">
 					<h2>ADD</h2>
 				</Link>
 			</MoreButton>

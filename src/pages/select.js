@@ -12,7 +12,6 @@ import ingredientsStore from '../hooks/ingredientsStore';
 
 export default function BarPage() {
 	const {data: session} = useSession();
-	const fetchIngredients = ingredientsStore(state => state.fetchIngredients);
 	const ingredients = ingredientsStore(state => state.ingredients);
 	const searchItem = ingredientsStore(state => state.searchItem);
 	const setSearchItem = ingredientsStore(state => state.setSearchItem);
@@ -20,11 +19,7 @@ export default function BarPage() {
 
 	useEffect(() => {
 		setSearchItem('');
-	}, []);
-
-	useEffect(() => {
-		fetchIngredients('/api/mongoIngredients');
-	}, [fetchIngredients]);
+	}, [setSearchItem]);
 
 	async function update() {
 		await fetch(`/api/users/${session.user.email}`, {
@@ -49,15 +44,13 @@ export default function BarPage() {
 					) : undefined;
 				})}
 			</StyledIngredientGrid>
-			<Link href="/bar" prefetch>
+			<Link href="/bar">
 				<MoreButton top="70%" onClick={update}>
 					save
 				</MoreButton>
 			</Link>
 			<MoreButton top="80%">
-				<Link href="/bar" prefetch>
-					Back
-				</Link>
+				<Link href="/bar">Back</Link>
 			</MoreButton>
 		</Layout>
 	);

@@ -1,4 +1,3 @@
-import {useSession} from 'next-auth/react';
 import Image from 'next/image';
 import {useState, useEffect} from 'react';
 import styled from 'styled-components';
@@ -12,30 +11,29 @@ import {TextWrapper} from './styled/TextWrapper.styled';
 import {StyledTitle} from './styled/Title.styled';
 import {TitleWrapper} from './styled/TitleWrapper.styled';
 
+const StyledImage = styled(Image)`
+	border-radius: 0.55rem;
+`;
+
 export default function SelectCard({ingredient}) {
-	const {data: session} = useSession();
 	const savedIngredients = ingredientsStore(state => state.savedIngredients);
-	const fetchSavedIngredients = ingredientsStore(state => state.fetchSavedIngredients);
+
 	const setMoreIngredients = ingredientsStore(state => state.setMoreIngredients);
-	const savedIngredientsNames = savedIngredients?.map(ingredient => ingredient.name);
 	const addMoreIngredients = ingredientsStore(state => state.addMoreIngredients);
 	const removeMoreIngredients = ingredientsStore(state => state.removeMoreIngredients);
 	const moreIngredients = ingredientsStore(state => state.moreIngredients);
+
+	const savedIngredientsNames = savedIngredients?.map(ingredient => ingredient.name);
 	const saved = savedIngredientsNames?.includes(ingredient.name);
 	const clicked = moreIngredients?.includes(ingredient._id);
 	const [isSaved, setIsSaved] = useState(saved);
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	useEffect(() => {
-		if (session) {
-			fetchSavedIngredients(`/api/users/${session.user.email}`);
-			const savedIngredientsIds = savedIngredients?.map(ingredient => ingredient._id);
-			setMoreIngredients(savedIngredientsIds);
-		}
-	}, [fetchSavedIngredients, session]);
-	const StyledImage = styled(Image)`
-		border-radius: 0.55rem;
-	`;
+		const savedIngredientsIds = savedIngredients?.map(ingredient => ingredient._id);
+		setMoreIngredients(savedIngredientsIds);
+	}, [savedIngredients, setMoreIngredients]);
+
 	return (
 		<StyledIngredientCard
 			onClick={() => {

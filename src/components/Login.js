@@ -14,9 +14,7 @@ export default function Login() {
 					<p>Signed in as </p>
 					<p>{session.user.email}</p>
 					<StyledLogin>
-						<Link href="/bar" prefetch>
-							Start
-						</Link>
+						<Link href="/bar">Start</Link>
 					</StyledLogin>
 					<StyledLogin onClick={() => signOut()}>Logout</StyledLogin>
 				</LoginWrapper>

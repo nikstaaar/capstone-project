@@ -30,6 +30,7 @@ const ingredientsStore = create(set => ({
 			const json = await response.json();
 			const data = json.data;
 			set({ingredients: data});
+			console.log('fetchIngredients success');
 		} catch (error) {
 			console.error(`Upps das war ein Fehler: ${error}`);
 		}
@@ -40,6 +41,7 @@ const ingredientsStore = create(set => ({
 			const json = await response.json();
 			const data = json[0].ingredients;
 			set({savedIngredients: data});
+			console.log('fetchSavedIngredients success');
 		} catch (error) {
 			console.error(`Upps das war ein Fehler: ${error}`);
 		}
