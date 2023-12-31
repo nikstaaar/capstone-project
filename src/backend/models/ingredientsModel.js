@@ -2,6 +2,7 @@ import {Schema, model, models} from 'mongoose';
 
 const ingredientsSchema = new Schema({
 	name: String,
+	alternatives: Array,
 	description: String,
 	alcoholic: Boolean,
 	color: String,

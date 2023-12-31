@@ -49,9 +49,10 @@ export default function BarPage() {
 					save
 				</MoreButton>
 			</Link>
-			<MoreButton top="80%">
-				<Link href="/bar">Back</Link>
-			</MoreButton>
+
+			<Link href="/bar">
+				<MoreButton top="80%">back</MoreButton>
+			</Link>
 		</Layout>
 	);
 }

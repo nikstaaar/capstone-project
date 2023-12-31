@@ -39,8 +39,13 @@ export default function CocktailPage() {
 	const ingredientNames = savedIngredients?.map(ingredient => {
 		return ingredient.name;
 	});
+	const alternatives = savedIngredients?.flatMap(ingredient => ingredient.alternatives);
+
 	const isAvailable = currentIngredient => {
-		return ingredientNames?.includes(currentIngredient);
+		return (
+			ingredientNames?.includes(currentIngredient) ||
+			(alternatives && alternatives.includes(currentIngredient))
+		);
 	};
 
 	return (
