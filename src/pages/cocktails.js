@@ -14,7 +14,7 @@ import ingredientsStore from '../hooks/ingredientsStore';
 
 export default function CocktailPage() {
 	const {data: session} = useSession();
-	const fetchCocktails = cocktailsStore(state => state.fetchCocktails);
+
 	const cocktails = cocktailsStore(state => state.cocktails);
 	const fetchSavedIngredients = ingredientsStore(state => state.fetchSavedIngredients);
 	const savedIngredients = ingredientsStore(state => state.savedIngredients);
@@ -32,21 +32,20 @@ export default function CocktailPage() {
 		}
 	}, [fetchSavedIngredients, session]);
 
-	useEffect(() => {
-		fetchCocktails('/api/cocktails');
-	}, [fetchCocktails]);
-
-	const ingredientNames = savedIngredients?.map(ingredient => {
-		return ingredient.name;
-	});
-	const alternatives = savedIngredients?.flatMap(ingredient => ingredient.alternatives);
+	const ingredientNames = savedIngredients?.map(ingredient => ingredient.name.toLowerCase());
+	const alternatives = savedIngredients?.flatMap(ingredient =>
+		ingredient.alternatives?.map(alt => alt.toLowerCase())
+	);
 
 	const isAvailable = currentIngredient => {
+		const lowercaseIngredient = currentIngredient.toLowerCase();
 		return (
-			ingredientNames?.includes(currentIngredient) ||
-			(alternatives && alternatives.includes(currentIngredient))
+			ingredientNames?.includes(lowercaseIngredient) ||
+			(alternatives && alternatives.includes(lowercaseIngredient))
 		);
 	};
+
+	console.log(cocktails);
 
 	return (
 		<Layout>
@@ -62,8 +61,8 @@ export default function CocktailPage() {
 						.toLowerCase()
 						.includes(searchItem.toString().toLowerCase()) &&
 						ingredients.every(isAvailable) ? (
-						<Link href={`/details/${cocktail.id}`}>
-							<StyledCocktailCard key={cocktail.id} onClick={() => {}}>
+						<Link key={cocktail.id} href={`/details/${cocktail.id}`}>
+							<StyledCocktailCard>
 								<h4>{cocktail.name}</h4>
 								<StyledImage
 									src={cocktail.image}
