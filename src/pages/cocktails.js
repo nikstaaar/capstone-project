@@ -37,14 +37,6 @@ export default function CocktailPage() {
 		ingredient.alternatives?.map(alt => alt.toLowerCase())
 	);
 
-	const isAvailable = currentIngredient => {
-		const lowercaseIngredient = currentIngredient.toLowerCase();
-		return (
-			ingredientNames?.includes(lowercaseIngredient) ||
-			(alternatives && alternatives.includes(lowercaseIngredient))
-		);
-	};
-
 	console.log(cocktails);
 
 	return (
@@ -53,26 +45,35 @@ export default function CocktailPage() {
 				<title key="title">My Bar</title>
 				<meta key="description" name="description" content="About" />
 			</Head>
-			<Search></Search>
+			<Search />
 			<CocktailsWrapper>
 				{cocktails.map(cocktail => {
 					const ingredients = cocktail.ingredients.names;
-					return cocktail.name
-						.toLowerCase()
-						.includes(searchItem.toString().toLowerCase()) &&
-						ingredients.every(isAvailable) ? (
-						<Link key={cocktail.id} href={`/details/${cocktail.id}`}>
-							<StyledCocktailCard>
-								<h4>{cocktail.name}</h4>
-								<StyledImage
-									src={cocktail.image}
-									alt={cocktail.name}
-									width="70px"
-									height="70px"
-								></StyledImage>
-							</StyledCocktailCard>
-						</Link>
-					) : undefined;
+					const lowercaseSearch = searchItem.toString().toLowerCase();
+					const cocktailName = cocktail.name.toLowerCase();
+
+					const isAvailable = ingredients.every(
+						ingredient =>
+							ingredientNames?.includes(ingredient.toLowerCase()) ||
+							(alternatives && alternatives.includes(ingredient.toLowerCase()))
+					);
+
+					if (cocktailName.startsWith(lowercaseSearch) && isAvailable) {
+						return (
+							<Link key={cocktail.id} href={`/details/${cocktail.id}`}>
+								<StyledCocktailCard>
+									<h4>{cocktail.name}</h4>
+									<StyledImage
+										src={cocktail.image}
+										alt={cocktail.name}
+										width="70px"
+										height="70px"
+									></StyledImage>
+								</StyledCocktailCard>
+							</Link>
+						);
+					}
+					return null;
 				})}
 			</CocktailsWrapper>
 		</Layout>

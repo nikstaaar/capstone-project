@@ -34,14 +34,17 @@ export default function BarPage() {
 				<title key="title">My Bar</title>
 				<meta key="description" name="description" content="About" />
 			</Head>
-			<Search></Search>
+			<Search />
 			<StyledIngredientGrid>
-				{ingredients.map(ingredient => {
-					return ingredient.name
-						.toLowerCase()
-						.includes(searchItem.toString().toLowerCase()) ? (
-						<SelectCard key={ingredient._id} ingredient={ingredient}></SelectCard>
-					) : undefined;
+				{ingredients?.map(ingredient => {
+					const searchQuery = searchItem.toString().toLowerCase();
+					const ingredientName = ingredient.name.toLowerCase();
+
+					if (ingredientName.startsWith(searchQuery)) {
+						return (
+							<SelectCard key={ingredient._id} ingredient={ingredient}></SelectCard>
+						);
+					} else return null;
 				})}
 			</StyledIngredientGrid>
 			<Link href="/bar">
