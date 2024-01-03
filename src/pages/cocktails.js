@@ -25,6 +25,7 @@ export default function CocktailPage() {
 		position: absolute;
 		bottom: 10px;
 		border-radius: 0.45rem;
+		cursor: pointer;
 	`;
 
 	useEffect(() => {

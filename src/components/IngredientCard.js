@@ -32,6 +32,7 @@ export default function IngredientCard({ingredient}) {
 
 	const StyledImage = styled(Image)`
 		border-radius: 0.55em;
+		cursor: pointer;
 	`;
 
 	return (

@@ -18,6 +18,7 @@ export const StyledLogin = styled.button`
 	text-align: center;
 	text-transform: uppercase;
 	white-space: normal;
+	cursor: pointer;
 `;
 
 export const StyledLogout = styled.button`
@@ -39,4 +40,5 @@ export const StyledLogout = styled.button`
 	text-align: center;
 	text-transform: uppercase;
 	white-space: normal;
+	cursor: pointer;
 `;
