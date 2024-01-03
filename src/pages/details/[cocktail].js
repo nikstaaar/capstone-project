@@ -1,6 +1,7 @@
 import {nanoid} from 'nanoid';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {useEffect} from 'react';
 import styled from 'styled-components';
@@ -33,8 +34,8 @@ const Details = () => {
 				<StyledImage
 					src={cocktail?.image}
 					alt={cocktail?.name}
-					width="300%"
-					height="300%"
+					width="100%"
+					height="150%"
 				></StyledImage>
 				<Wrapper>
 					<div>
@@ -52,6 +53,9 @@ const Details = () => {
 				</Wrapper>
 				<h4>Details:</h4>
 				<p>{cocktail?.instructions}</p>
+				<Link href="/cocktails">
+					<a>Back to cocktails</a>
+				</Link>
 			</PageWrapper>
 		</Layout>
 	);

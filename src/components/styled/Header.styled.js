@@ -11,5 +11,6 @@ export const StyledHeader = styled.header`
 `;
 
 export const Headline = styled.h1`
+	font-family: 'Allenoire', serif;
 	font-size: 1.5em;
 `;
