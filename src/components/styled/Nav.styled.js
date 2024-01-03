@@ -7,7 +7,7 @@ export const StyledNav = styled.nav`
 	align-items: center;
 	justify-content: space-evenly;
 	width: 100%;
-	height: 8%;
+	height: 10%;
 	margin-top: 20%;
 	border-radius: 25px 25px 0 0;
 	background-color: #f7dda4;

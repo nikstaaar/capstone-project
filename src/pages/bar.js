@@ -9,11 +9,12 @@ import Search from '../components/Search';
 import {StyledIngredientGrid} from '../components/styled/IngredientCard.styled';
 import {MoreButton} from '../components/styled/MoreButton.styled';
 import ingredientsStore from '../hooks/ingredientsStore';
+import useStore from '../hooks/useStore';
 
 export default function BarPage() {
 	const {data: session} = useSession();
 	const fetchSavedIngredients = ingredientsStore(state => state.fetchSavedIngredients);
-	const savedIngredients = ingredientsStore(state => state.savedIngredients);
+	const savedIngredients = useStore(ingredientsStore, state => state.savedIngredients);
 	const searchItem = ingredientsStore(state => state.searchItem);
 	const setSearchItem = ingredientsStore(state => state.setSearchItem);
 

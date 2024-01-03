@@ -1,24 +1,32 @@
 import Link from 'next/link';
+import styled from 'styled-components';
 
 import {LinkWrapper} from './styled/LinkWrapper.styled';
 import {StyledNav} from './styled/Nav.styled';
+
 export default function Footer() {
+	const StyledLink = styled.a`
+		color: black;
+		font-weight: 600;
+		cursor: pointer;
+	`;
+
 	return (
 		<footer>
 			<StyledNav>
 				<LinkWrapper>
 					<Link href="/bar">
-						<h4>My Bar</h4>
+						<StyledLink>My Bar</StyledLink>
 					</Link>
 				</LinkWrapper>
 				<LinkWrapper>
 					<Link href="/cocktails">
-						<h4>Cocktails</h4>
+						<StyledLink>Cocktails</StyledLink>
 					</Link>
 				</LinkWrapper>
 				<LinkWrapper>
 					<Link href="/user">
-						<h4>Account</h4>
+						<StyledLink>User</StyledLink>
 					</Link>
 				</LinkWrapper>
 			</StyledNav>
