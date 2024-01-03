@@ -1,5 +1,4 @@
 import {useSession} from 'next-auth/react';
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import {useEffect} from 'react';
@@ -39,44 +38,47 @@ export default function CocktailPage() {
 		ingredient.alternatives?.map(alt => alt.toLowerCase())
 	);
 
-	console.log(cocktails);
+	const filteredCocktails = cocktails?.filter(cocktail => {
+		const ingredients = cocktail.ingredients.names;
+		const lowercaseSearch = searchItem.toString().toLowerCase();
+		const cocktailName = cocktail.name.toLowerCase();
+
+		const isAvailable = ingredients.every(
+			ingredient =>
+				ingredientNames?.includes(ingredient.toLowerCase()) ||
+				(alternatives && alternatives.includes(ingredient.toLowerCase()))
+		);
+
+		return cocktailName.startsWith(lowercaseSearch) && isAvailable;
+	});
 
 	return (
 		<Layout>
-			<Head>
-				<title key="title">My Bar</title>
-				<meta key="description" name="description" content="About" />
-			</Head>
 			<Search />
 			<CocktailsWrapper>
-				{cocktails?.map(cocktail => {
-					const ingredients = cocktail.ingredients.names;
-					const lowercaseSearch = searchItem.toString().toLowerCase();
-					const cocktailName = cocktail.name.toLowerCase();
-
-					const isAvailable = ingredients.every(
-						ingredient =>
-							ingredientNames?.includes(ingredient.toLowerCase()) ||
-							(alternatives && alternatives.includes(ingredient.toLowerCase()))
-					);
-
-					if (cocktailName.startsWith(lowercaseSearch) && isAvailable) {
-						return (
-							<Link key={cocktail.id} href={`/details/${cocktail.id}`}>
-								<StyledCocktailCard>
-									<h4>{cocktail.name}</h4>
-									<StyledImage
-										src={cocktail.image}
-										alt={cocktail.name}
-										width="70px"
-										height="70px"
-									></StyledImage>
-								</StyledCocktailCard>
-							</Link>
-						);
-					}
-					return null;
-				})}
+				{filteredCocktails && filteredCocktails.length > 0 ? (
+					filteredCocktails.map(cocktail => (
+						<Link key={cocktail.id} href={`/details/${cocktail.id}`}>
+							<StyledCocktailCard>
+								<h4>{cocktail.name}</h4>
+								<StyledImage
+									src={cocktail.image}
+									alt={cocktail.name}
+									width="70px"
+									height="70px"
+								/>
+							</StyledCocktailCard>
+						</Link>
+					))
+				) : (
+					<>
+						<br />
+						<h2>
+							You can make no cocktails with the ingredients in your bar. Make sure to
+							add more ingredients to your bar.
+						</h2>
+					</>
+				)}
 			</CocktailsWrapper>
 		</Layout>
 	);

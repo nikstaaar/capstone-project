@@ -13,6 +13,7 @@ import {TitleWrapper} from './styled/TitleWrapper.styled';
 
 const StyledImage = styled(Image)`
 	border-radius: 0.55rem;
+	cursor: pointer;
 `;
 
 export default function SelectCard({ingredient}) {

@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import {useEffect} from 'react';
 
 import Login from '../components/Login';
@@ -31,10 +30,6 @@ export default function HomePage() {
 
 	return (
 		<>
-			<Head>
-				<title key="title">My Project</title>
-				<meta key="description" name="description" content="This is my project" />
-			</Head>
 			<video
 				autoPlay
 				loop

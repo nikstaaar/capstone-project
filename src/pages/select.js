@@ -1,22 +1,16 @@
-import {useSession} from 'next-auth/react';
-import Head from 'next/head';
-import Link from 'next/link';
 import {useEffect} from 'react';
 
 import Layout from '../components/Layout';
 import Search from '../components/Search';
 import SelectCard from '../components/SelectCard';
 import {StyledIngredientGrid} from '../components/styled/IngredientCard.styled';
-import {MoreButton} from '../components/styled/MoreButton.styled';
 import ingredientsStore from '../hooks/ingredientsStore';
 import useStore from '../hooks/useStore';
 
 export default function BarPage() {
-	const {data: session} = useSession();
 	const ingredients = useStore(ingredientsStore, state => state.ingredients);
 	const searchItem = ingredientsStore(state => state.searchItem);
 	const setSearchItem = ingredientsStore(state => state.setSearchItem);
-	const moreIngredients = ingredientsStore(state => state.moreIngredients);
 	const savedIngredients = ingredientsStore(state => state.savedIngredients);
 	const setMoreIngredients = ingredientsStore(state => state.setMoreIngredients);
 
@@ -29,19 +23,8 @@ export default function BarPage() {
 		setMoreIngredients(savedIngredientsIds);
 	}, [savedIngredients, setMoreIngredients]);
 
-	async function update() {
-		await fetch(`/api/users/${session.user.email}`, {
-			method: 'PUT',
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify(moreIngredients),
-		});
-	}
 	return (
 		<Layout>
-			<Head>
-				<title key="title">My Bar</title>
-				<meta key="description" name="description" content="About" />
-			</Head>
 			<Search />
 			<StyledIngredientGrid>
 				{ingredients?.map(ingredient => {
@@ -54,15 +37,6 @@ export default function BarPage() {
 					} else return null;
 				})}
 			</StyledIngredientGrid>
-			<Link href="/bar">
-				<MoreButton top="70%" onClick={update}>
-					save
-				</MoreButton>
-			</Link>
-
-			<Link href="/bar">
-				<MoreButton top="80%">back</MoreButton>
-			</Link>
 		</Layout>
 	);
 }

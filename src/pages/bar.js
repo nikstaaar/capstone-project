@@ -1,5 +1,4 @@
 import {useSession} from 'next-auth/react';
-import Head from 'next/head';
 import Link from 'next/link';
 import {useEffect} from 'react';
 
@@ -30,12 +29,16 @@ export default function BarPage() {
 
 	return (
 		<Layout>
-			<Head>
-				<title key="title">My Bar</title>
-				<meta key="description" name="description" content="About" />
-			</Head>
 			<Search />
 			<StyledIngredientGrid>
+				{savedIngredients?.length === 0 && (
+					<>
+						<br />
+						<h2>
+							Your Bar is empty. Click the add button to add ingredients to your bar.
+						</h2>
+					</>
+				)}
 				{savedIngredients?.map(ingredient => {
 					const searchQuery = searchItem.toString().toLowerCase();
 					const ingredientName = ingredient.name.toLowerCase();
