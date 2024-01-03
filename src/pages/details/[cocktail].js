@@ -50,6 +50,7 @@ const Details = () => {
 				</Wrapper>
 				<h4>Details:</h4>
 				<p>{cocktail?.instructions}</p>
+				<br />
 				<Link href="/cocktails">
 					<a>Back to cocktails</a>
 				</Link>
