@@ -3,7 +3,7 @@ import {createGlobalStyle} from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Allenoire';
-    src: url('public/Allenoire.otf'), format('opentype');
+    src: url('/Allenoire.otf'), format('opentype');
   }
 
   * {

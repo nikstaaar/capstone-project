@@ -9,6 +9,7 @@ export default function Footer() {
 
 	const StyledLink = styled.a`
 		color: ${props => (props.isActive ? '#f7dda4' : 'black')};
+		font-family: 'Allenoire', serif;
 		font-weight: 600;
 		cursor: pointer;
 	`;
