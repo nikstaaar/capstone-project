@@ -3,22 +3,19 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {useEffect} from 'react';
 import styled from 'styled-components';
 
 import Layout from '../../components/Layout';
 import {PageWrapper} from '../../components/styled/PageWrapper.styled';
 import {Wrapper} from '../../components/styled/Wrapper.styled';
 import cocktailsStore from '../../hooks/cocktailsStore';
+import useStore from '../../hooks/useStore';
+
 const Details = () => {
-	const fetchCocktails = cocktailsStore(state => state.fetchCocktails);
-	const cocktails = cocktailsStore(state => state.cocktails);
+	const cocktails = useStore(cocktailsStore, state => state.cocktails);
 	const router = useRouter();
 	const cocktailID = router.query.cocktail;
 	const cocktail = cocktails?.find(cocktail => cocktail.id === cocktailID);
-	useEffect(() => {
-		fetchCocktails('/api/cocktails');
-	}, [fetchCocktails]);
 
 	const StyledImage = styled(Image)`
 		border-radius: 0.45rem;

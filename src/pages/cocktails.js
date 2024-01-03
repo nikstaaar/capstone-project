@@ -11,11 +11,12 @@ import {StyledCocktailCard} from '../components/styled/CocktailCard.styled';
 import {CocktailsWrapper} from '../components/styled/CocktailsWrapper.styled';
 import cocktailsStore from '../hooks/cocktailsStore';
 import ingredientsStore from '../hooks/ingredientsStore';
+import useStore from '../hooks/useStore';
 
 export default function CocktailPage() {
 	const {data: session} = useSession();
 
-	const cocktails = cocktailsStore(state => state.cocktails);
+	const cocktails = useStore(cocktailsStore, state => state.cocktails);
 	const fetchSavedIngredients = ingredientsStore(state => state.fetchSavedIngredients);
 	const savedIngredients = ingredientsStore(state => state.savedIngredients);
 	const searchItem = ingredientsStore(state => state.searchItem);
@@ -47,7 +48,7 @@ export default function CocktailPage() {
 			</Head>
 			<Search />
 			<CocktailsWrapper>
-				{cocktails.map(cocktail => {
+				{cocktails?.map(cocktail => {
 					const ingredients = cocktail.ingredients.names;
 					const lowercaseSearch = searchItem.toString().toLowerCase();
 					const cocktailName = cocktail.name.toLowerCase();
