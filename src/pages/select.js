@@ -16,10 +16,17 @@ export default function BarPage() {
 	const searchItem = ingredientsStore(state => state.searchItem);
 	const setSearchItem = ingredientsStore(state => state.setSearchItem);
 	const moreIngredients = ingredientsStore(state => state.moreIngredients);
+	const savedIngredients = ingredientsStore(state => state.savedIngredients);
+	const setMoreIngredients = ingredientsStore(state => state.setMoreIngredients);
 
 	useEffect(() => {
 		setSearchItem('');
 	}, [setSearchItem]);
+
+	useEffect(() => {
+		const savedIngredientsIds = savedIngredients?.map(ingredient => ingredient._id);
+		setMoreIngredients(savedIngredientsIds);
+	}, [savedIngredients, setMoreIngredients]);
 
 	async function update() {
 		await fetch(`/api/users/${session.user.email}`, {
@@ -39,7 +46,6 @@ export default function BarPage() {
 				{ingredients?.map(ingredient => {
 					const searchQuery = searchItem.toString().toLowerCase();
 					const ingredientName = ingredient.name.toLowerCase();
-
 					if (ingredientName.startsWith(searchQuery)) {
 						return (
 							<SelectCard key={ingredient._id} ingredient={ingredient}></SelectCard>
