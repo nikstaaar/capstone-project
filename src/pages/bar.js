@@ -35,7 +35,7 @@ export default function BarPage() {
 					<>
 						<br />
 						<h2>
-							Your Bar is empty. Click the add button to add ingredients to your bar.
+							Your bar is empty. Click the add button to add ingredients to your bar.
 						</h2>
 					</>
 				)}

@@ -8,10 +8,11 @@ export const StyledIngredientGrid = styled.ul`
 	grid-column-gap: 15px;
 	grid-row-gap: 15px;
 	grid-template-columns: repeat(auto-fit, minmax(100px, 100px));
-	align-self: center;
+	align-content: center;
 	width: 100%;
+	margin: 0 auto;
 	padding-right: 2%;
-	padding-left: 6%;
+	padding-left: 7.5%;
 	list-style: none;
 `;
 
