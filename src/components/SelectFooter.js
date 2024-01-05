@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import useIngredientsStore from '../hooks/ingredientsStore';
+import useStore from '../hooks/useStore';
 
 import {StyledNav} from './styled/Nav.styled';
 
@@ -25,7 +26,7 @@ export default function SelectFooter() {
 	`;
 
 	const {data: session} = useSession();
-	const moreIngredients = useIngredientsStore(state => state.moreIngredients);
+	const moreIngredients = useStore(useIngredientsStore(state => state.moreIngredients));
 
 	async function update() {
 		await fetch(`/api/users/${session.user.email}`, {

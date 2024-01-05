@@ -11,7 +11,7 @@ export default function BarPage() {
 	const ingredients = useStore(ingredientsStore, state => state.ingredients);
 	const searchItem = ingredientsStore(state => state.searchItem);
 	const setSearchItem = ingredientsStore(state => state.setSearchItem);
-	const savedIngredients = ingredientsStore(state => state.savedIngredients);
+	const savedIngredients = useStore(ingredientsStore, state => state.savedIngredients);
 	const setMoreIngredients = ingredientsStore(state => state.setMoreIngredients);
 
 	useEffect(() => {
