@@ -33,7 +33,6 @@ const useIngredientsStore = create(
 					const json = await response.json();
 					const data = json.data;
 					set({ingredients: data});
-					console.log('fetchIngredients success');
 				} catch (error) {
 					console.error(`Oops, there was an error: ${error}`);
 				}
@@ -44,7 +43,6 @@ const useIngredientsStore = create(
 					const json = await response.json();
 					const data = json[0].ingredients;
 					set({savedIngredients: data});
-					console.log('fetchSavedIngredients success');
 				} catch (error) {
 					console.error(`Oops, there was an error: ${error}`);
 				}
