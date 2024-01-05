@@ -26,7 +26,7 @@ export default function SelectFooter() {
 	`;
 
 	const {data: session} = useSession();
-	const moreIngredients = useStore(useIngredientsStore(state => state.moreIngredients));
+	const moreIngredients = useStore(useIngredientsStore, state => state.moreIngredients);
 
 	async function update() {
 		await fetch(`/api/users/${session.user.email}`, {
